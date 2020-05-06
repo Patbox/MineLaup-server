@@ -88,4 +88,15 @@ module.exports = {
       }
     },
   },
+
+  /*
+   ** Typescript module configuration
+   ** See https://typescript.nuxtjs.org
+   */
+  typescript: {
+    typeCheck: {
+      eslint: true,
+      vue: true,
+    },
+  },
 }
