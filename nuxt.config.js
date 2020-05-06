@@ -23,7 +23,7 @@ module.exports = {
   /*
    ** Global CSS
    */
-  css: [],
+  css: ['~/assets/scss/app.scss'],
   /*
    ** Plugins to load before mounting the App
    */
@@ -46,17 +46,30 @@ module.exports = {
     '@nuxtjs/axios',
     '@nuxtjs/pwa',
     // Doc: https://github.com/nuxt-community/dotenv-module
-    '@nuxtjs/dotenv'
+    '@nuxtjs/dotenv',
+    '@nuxtjs/proxy'
   ],
   /*
    ** Axios module configuration
    ** See https://axios.nuxtjs.org/options
    */
-  axios: {},
+  axios: {
+    proxy: true
+  },
   /*
    ** Build configuration
    */
   build: {
+    postcss: {
+      preset: {
+        features: {
+          customProperties: false
+        }
+      },
+      plugins: {
+        tailwindcss: require('./tailwind.config')
+      }
+    },
     /*
      ** You can extend webpack config here
      */
