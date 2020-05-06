@@ -99,4 +99,10 @@ module.exports = {
       vue: true,
     },
   },
+
+  /*
+   ** Server middleware configuration
+   ** See https://nuxtjs.org/api/configuration-servermiddleware
+   */
+  serverMiddleware: ['~/api/index.ts'],
 }
