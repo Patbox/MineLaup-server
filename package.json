@@ -1,6 +1,6 @@
 {
   "name": "minelaup-server",
-  "version": "0.4.0",
+  "version": "0.5.0",
   "description": "The server side of the project MineLaup.",
   "author": "Louis Bailleau",
   "private": true,
@@ -27,6 +27,7 @@
     "@nuxtjs/axios": "^5.10.3",
     "@nuxtjs/dotenv": "^1.4.1",
     "@nuxtjs/pwa": "^3.0.0-beta.20",
+    "body-parser": "^1.19.0",
     "cross-env": "^7.0.2",
     "express": "^4.17.1",
     "nuxt": "^2.12.2"
