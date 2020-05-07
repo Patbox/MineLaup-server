@@ -1,13 +1,15 @@
 {
   "name": "minelaup-server",
-  "version": "0.5.0",
+  "version": "0.7.0",
   "description": "The server side of the project MineLaup.",
   "author": "Louis Bailleau",
   "private": true,
   "scripts": {
     "dev": "cross-env NODE_ENV=development nuxt-ts",
-    "build": "nuxt build",
-    "start": "cross-env NODE_ENV=production nuxt-ts",
+    "build": "nuxt-ts build",
+    "build:docker": "docker build -t minelaup/minelaup_server .",
+    "start": "cross-env NODE_ENV=production nuxt-ts start",
+    "start:docker": "docker run --rm minelaup/minelaup_server",
     "lint": "eslint --ext .js,.vue,.ts --ignore-path .gitignore .",
     "lint:fix": "eslint --ext .js,.vue,.ts --ignore-path .gitignore . --fix",
     "test": "cross-env TEST=test jest",
