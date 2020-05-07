@@ -8,10 +8,10 @@
     "dev": "cross-env NODE_ENV=development nuxt-ts",
     "build": "nuxt build",
     "start": "cross-env NODE_ENV=production nuxt-ts",
-    "generate": "nuxt-ts generate",
     "lint": "eslint --ext .js,.vue,.ts --ignore-path .gitignore .",
     "lint:fix": "eslint --ext .js,.vue,.ts --ignore-path .gitignore . --fix",
-    "test": "jest"
+    "test": "cross-env TEST=test jest",
+    "coverage": "jest --coverage"
   },
   "lint-staged": {
     "*.{js,vue,ts}": "npm run lint",
