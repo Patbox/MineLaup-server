@@ -1,0 +1,18 @@
+language: node_js
+
+node_js:
+  - lts/*
+
+cache: npm
+
+notifications:
+ email:
+  enabled: false
+
+install:
+  - npm install
+
+script:
+  - npm run test
+  - npm run coverage
+  - npm run build
