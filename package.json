@@ -12,8 +12,8 @@
     "start:docker": "docker run --rm minelaup/minelaup_server",
     "lint": "eslint --ext .js,.vue,.ts --ignore-path .gitignore .",
     "lint:fix": "eslint --ext .js,.vue,.ts --ignore-path .gitignore . --fix",
-    "test": "cross-env TEST=test jest",
-    "coverage": "jest --coverage"
+    "test": "cross-env TEST=test jest --passWithNoTests",
+    "coverage": "jest --coverage --passWithNoTests"
   },
   "lint-staged": {
     "*.{js,vue,ts}": "npm run lint",
