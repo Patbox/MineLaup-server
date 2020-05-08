@@ -70,9 +70,7 @@ async function run() {
       },
     ])
 
-    const settings = new Memiens(
-      path.resolve(__dirname, '../storage/config.yml')
-    )
+    const settings = new Memiens(config)
 
     settings.set('database.type', dbList[databaseResponse.db_type])
     settings.set('database.name', databaseResponse.db_name)
