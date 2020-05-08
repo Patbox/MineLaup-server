@@ -9,7 +9,7 @@ const sequelize = new Sequelize(
   {
     storage:
       config.get().database.type === 'sqlite' ? config.get().database.path : '',
-    models: [path.join(__dirname, '/*.models.ts')],
+    models: [path.join(__dirname, '/*.model.ts')],
     modelMatch: (filename, member) => {
       return (
         filename.substring(0, filename.indexOf('.model')) ===

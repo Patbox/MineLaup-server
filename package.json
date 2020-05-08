@@ -1,6 +1,6 @@
 {
   "name": "minelaup-server",
-  "version": "0.10.0",
+  "version": "0.11.0",
   "description": "The server side of the project MineLaup.",
   "author": "Louis Bailleau",
   "private": true,
@@ -14,7 +14,8 @@
     "lint:fix": "eslint --ext .js,.vue,.ts --ignore-path .gitignore . --fix",
     "test": "cross-env TEST=test jest --passWithNoTests",
     "coverage": "jest --coverage --passWithNoTests",
-    "config": "node ./script/config.script.js"
+    "config": "node ./script/config.script.js",
+    "create-user": "node ./script/create-user.script.js"
   },
   "lint-staged": {
     "*.{js,vue,ts}": "npm run lint",

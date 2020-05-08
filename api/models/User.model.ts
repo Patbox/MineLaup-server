@@ -14,7 +14,7 @@ import {
   BeforeUpdate,
   BeforeCreate,
 } from 'sequelize-typescript'
-import { UserRole, IUserRole } from '~/types/UserRole'
+import { UserRole, IUserRole } from '../../types/UserRole'
 
 @Table({
   timestamps: true,
@@ -22,6 +22,7 @@ import { UserRole, IUserRole } from '~/types/UserRole'
 export default class User extends Model<User> {
   @IsUUID(4)
   @PrimaryKey
+  @Default(DataType.UUIDV4)
   @Column
   id!: string
 
