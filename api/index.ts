@@ -1,6 +1,13 @@
 import express, { Application } from 'express'
 import bodyParser from 'body-parser'
 import router from './routers'
+import config from './utils/config'
+import sequelize from './models'
+
+/**
+ * Check configuration exists
+ */
+config.check()
 
 const app: Application = express()
 
@@ -10,7 +17,15 @@ app.use(
   })
 )
 
+/**
+ * Registering routes
+ */
 router(app)
+
+/**
+ * Sync the sequelize database
+ */
+sequelize.sync()
 
 export default {
   path: '/api',
