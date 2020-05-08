@@ -1,6 +1,6 @@
 {
   "name": "minelaup-server",
-  "version": "0.9.0",
+  "version": "0.10.0",
   "description": "The server side of the project MineLaup.",
   "author": "Louis Bailleau",
   "private": true,
@@ -30,6 +30,7 @@
     "@nuxtjs/axios": "^5.10.3",
     "@nuxtjs/dotenv": "^1.4.1",
     "@nuxtjs/pwa": "^3.0.0-beta.20",
+    "bcrypt": "^4.0.1",
     "body-parser": "^1.19.0",
     "chalk": "^4.0.0",
     "config-yaml": "^1.1.4",
@@ -51,6 +52,7 @@
     "@nuxtjs/proxy": "^1.3.3",
     "@nuxtjs/stylelint-module": "^3.2.2",
     "@nuxtjs/tailwindcss": "^2.0.0",
+    "@types/bcrypt": "^3.0.0",
     "@types/bluebird": "^3.5.30",
     "@types/config-yaml": "^1.1.1",
     "@types/node": "^13.13.5",
