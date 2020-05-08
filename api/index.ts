@@ -25,9 +25,7 @@ router(app)
 /**
  * Sync the sequelize database
  */
-if (config.get().database.type) {
-  sequelize.sync()
-}
+sequelize.sync()
 
 export default {
   path: '/api',
