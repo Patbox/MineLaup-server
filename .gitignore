@@ -88,3 +88,7 @@ sw.*
 
 # Vim swap files
 *.swp
+
+# Ignore storage folder
+storage/*
+!storage/**/.gitkeep

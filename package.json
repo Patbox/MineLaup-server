@@ -1,6 +1,6 @@
 {
   "name": "minelaup-server",
-  "version": "0.7.0",
+  "version": "0.8.0",
   "description": "The server side of the project MineLaup.",
   "author": "Louis Bailleau",
   "private": true,
@@ -13,7 +13,8 @@
     "lint": "eslint --ext .js,.vue,.ts --ignore-path .gitignore .",
     "lint:fix": "eslint --ext .js,.vue,.ts --ignore-path .gitignore . --fix",
     "test": "cross-env TEST=test jest --passWithNoTests",
-    "coverage": "jest --coverage --passWithNoTests"
+    "coverage": "jest --coverage --passWithNoTests",
+    "config": "node ./script/config.script.js"
   },
   "lint-staged": {
     "*.{js,vue,ts}": "npm run lint",
@@ -30,8 +31,12 @@
     "@nuxtjs/dotenv": "^1.4.1",
     "@nuxtjs/pwa": "^3.0.0-beta.20",
     "body-parser": "^1.19.0",
+    "chalk": "^4.0.0",
     "cross-env": "^7.0.2",
     "express": "^4.17.1",
+    "figlet": "^1.4.0",
+    "inquirer": "^7.1.0",
+    "memiens": "^1.0.4",
     "nuxt": "^2.12.2"
   },
   "devDependencies": {
