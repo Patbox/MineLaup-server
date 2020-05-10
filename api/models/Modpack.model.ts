@@ -9,7 +9,7 @@ import {
   ForeignKey,
   PrimaryKey,
 } from 'sequelize-typescript'
-import User from './User.model'
+import Users from './Users.model'
 
 @Table({
   timestamps: true,
@@ -29,7 +29,7 @@ export default class Modpack extends Model<Modpack> {
   @Column
   description!: string
 
-  @ForeignKey(() => User)
+  @ForeignKey(() => Users)
   @Column
   ownerId!: string
 }

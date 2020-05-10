@@ -20,7 +20,7 @@ import { ColorMode, IColorMode } from '../../types/ColorMode'
 @Table({
   timestamps: true,
 })
-export default class User extends Model<User> {
+export default class Users extends Model<Users> {
   @IsUUID(4)
   @PrimaryKey
   @Default(DataType.UUIDV4)
@@ -54,7 +54,7 @@ export default class User extends Model<User> {
 
   @BeforeUpdate
   @BeforeCreate
-  static async cryptPassword(instance: User) {
+  static async cryptPassword(instance: Users) {
     await cryptPassword(instance.password).then((success) => {
       instance.password = success
     })
