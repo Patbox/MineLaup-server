@@ -15,6 +15,7 @@ import {
   BeforeCreate,
 } from 'sequelize-typescript'
 import { UserRole, IUserRole } from '../../types/UserRole'
+import { ColorMode, IColorMode } from '../../types/ColorMode'
 
 @Table({
   timestamps: true,
@@ -46,6 +47,10 @@ export default class User extends Model<User> {
   @Default('en')
   @Column
   language!: string
+
+  @Default('LIGHT')
+  @Column(DataType.ENUM(...Object.values(ColorMode)))
+  colorMode!: IColorMode
 
   @BeforeUpdate
   @BeforeCreate
