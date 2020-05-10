@@ -65,6 +65,7 @@
     "@types/hapi__joi": "^17.1.0",
     "@types/jsonwebtoken": "^8.3.9",
     "@types/node": "^13.13.5",
+    "@types/nuxtjs__auth": "^4.8.4",
     "@types/validator": "^13.0.0",
     "@vue/test-utils": "^1.0.2",
     "babel-eslint": "^10.1.0",

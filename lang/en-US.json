@@ -1,3 +1,11 @@
 {
-  "app-name": "MineLaup"
+  "app-name": "MineLaup",
+  "pages": {
+    "login": {
+      "title": "Login",
+      "username": "Username",
+      "password": "Password",
+      "btn": "Login"
+    }
+  }
 }

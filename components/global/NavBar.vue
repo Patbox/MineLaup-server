@@ -28,7 +28,7 @@
 
           <ul
             v-if="showLanguageList"
-            class="text-left bg-white p-4 rounded-lg w-1/5 right-0 mr-2 mt-4 absolute shadow-lg overflow-x-auto"
+            class="text-left bg-white p-1 rounded-lg w-1/5 right-0 mr-2 mt-4 absolute shadow-lg overflow-x-auto"
           >
             <li
               v-for="locale in locales"
