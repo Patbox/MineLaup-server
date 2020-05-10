@@ -37,6 +37,7 @@ module.exports = {
     '@nuxtjs/stylelint-module',
     // Doc: https://github.com/nuxt-community/nuxt-tailwindcss
     '@nuxtjs/tailwindcss',
+    'nuxt-i18n',
   ],
   /*
    ** Nuxt.js modules
@@ -48,6 +49,8 @@ module.exports = {
     // Doc: https://github.com/nuxt-community/dotenv-module
     '@nuxtjs/dotenv',
     '@nuxtjs/proxy',
+    // Doc: https://auth.nuxtjs.org/
+    '@nuxtjs/auth',
   ],
   /*
    ** Axios module configuration
@@ -105,4 +108,60 @@ module.exports = {
    ** See https://nuxtjs.org/api/configuration-servermiddleware
    */
   serverMiddleware: ['~/api/index.ts'],
+
+  /*
+   ** I18N configuration
+   ** See https://nuxt-community.github.io/nuxt-i18n
+   */
+  i18n: {
+    defaultLocale: 'en',
+    seo: true,
+    strategy: 'no_prefix',
+    locales: [
+      {
+        code: 'fr',
+        iso: 'fr-FR',
+        name: 'Français',
+      },
+      {
+        code: 'en',
+        iso: 'en-US',
+        name: 'English',
+      },
+    ],
+    vueI18n: {
+      fallbackLocale: 'en-US',
+      messages: {
+        fr: require('./lang/fr-FR.json'),
+        en: require('./lang/en-US.json'),
+      },
+    },
+  },
+
+  router: {
+    middleware: ['auth'],
+  },
+
+  auth: {
+    strategies: {
+      local: {
+        endpoints: {
+          login: {
+            url: '/api/auth/login',
+            method: 'post',
+            propertyName: 'token',
+          },
+          logout: false,
+          user: false, // { url: '/api/auth/user', method: 'get', propertyName: 'user' },
+        },
+        tokenRequired: true,
+        tokenType: '',
+        autoFetchUser: true,
+      },
+    },
+
+    redirect: {
+      login: '/login',
+    },
+  },
 }
