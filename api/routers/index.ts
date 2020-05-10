@@ -1,3 +1,6 @@
 import { Application } from 'express'
+import AuthRouter from './auth.router'
 
-export default (_app: Application) => {}
+export default (app: Application) => {
+  app.use('/auth', AuthRouter)
+}
