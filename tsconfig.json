@@ -24,8 +24,13 @@
         "./*"
       ]
     },
+    "types": [
+      "@nuxt/types",
+      "@nuxtjs/auth",
+      "nuxt-i18n"
+    ],
     "typeRoots": [
-      "node_modules/@types"
+      "node_modules/@types",
     ]
   },
   "exclude": [

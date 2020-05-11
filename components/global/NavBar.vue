@@ -75,7 +75,7 @@ export default class NavBar extends Vue {
   get locales() {
     // @ts-ignore
     const locales = this.$i18n.locales
-    return locales.sort((a: any, b: any) => {
+    return locales?.sort((a: any, b: any) => {
       if (a.code < b.code) return -1
       if (a.code > b.code) return 1
       return 0

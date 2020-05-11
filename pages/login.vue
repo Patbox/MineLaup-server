@@ -78,20 +78,25 @@ export default class Login extends Vue {
     this.errorMsg = ''
     this.errors = {}
 
-    this.$auth.loginWith('local', { data: this.form }).catch((error: any) => {
-      if (error.response?.status) {
-        switch (error.response.status) {
-          case 400:
-            this.errors = Object.assign({}, error.response.data.errors)
-            break
-          case 403:
-            this.errorMsg = error.response.data.errorKey
-            break
-          default:
-            this.errorMsg = 'error.unknown'
+    this.$auth
+      .loginWith('local', { data: this.form })
+      .then(() => {
+        this.$i18n.setLocale(this.$auth.user.language)
+      })
+      .catch((error: any) => {
+        if (error.response?.status) {
+          switch (error.response.status) {
+            case 400:
+              this.errors = Object.assign({}, error.response.data.errors)
+              break
+            case 403:
+              this.errorMsg = error.response.data.errorKey
+              break
+            default:
+              this.errorMsg = 'error.unknown'
+          }
         }
-      }
-    })
+      })
   }
 }
 </script>
