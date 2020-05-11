@@ -6,7 +6,7 @@ import {
   Column,
   ForeignKey,
 } from 'sequelize-typescript'
-import User from './User.model'
+import Users from './Users.model'
 import Launcher from './Launcher.model'
 
 @Table
@@ -18,7 +18,7 @@ export default class LauncherHasCollaborator extends Model<
   @Column
   id!: number
 
-  @ForeignKey(() => User)
+  @ForeignKey(() => Users)
   @Column
   userId!: string
 

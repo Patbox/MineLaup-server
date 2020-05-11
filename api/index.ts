@@ -8,7 +8,7 @@ import { UserRole } from '../types/UserRole'
 import router from './routers'
 import config from './utils/config'
 import sequelize from './models'
-import User from './models/User.model'
+import Users from './models/Users.model'
 
 /**
  * Check configuration exists
@@ -31,8 +31,7 @@ sequelize.sync().then(async () => {
    * Check for the admin user
    */
   // eslint-disable-next-line no-console
-  console.log(await User.count())
-  if ((await User.count()) === 0) {
+  if ((await Users.count()) === 0) {
     const userConfigPath = path.resolve(__dirname, '../storage/user.yml')
     /**
      * Is the config file exist ?
@@ -53,7 +52,7 @@ sequelize.sync().then(async () => {
      * Create the user
      */
     const userConfig = configYaml(userConfigPath)
-    const adminUser = new User({
+    const adminUser = new Users({
       username: userConfig.username,
       password: userConfig.password,
       role: UserRole.user,
