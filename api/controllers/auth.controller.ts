@@ -70,6 +70,44 @@ async function login(req: Request, res: Response) {
   }
 }
 
+async function user(req: Request, res: Response) {
+  const token = req.headers.authorization
+
+  if (!token) {
+    return res.status(400).send({
+      message: 'Authorization header not found.',
+      errorKey: 'auth.login.token_not_found',
+    })
+  }
+
+  await jwt.verify(
+    token,
+    config.get().jwt_token,
+    (
+      error:
+        | jwt.JsonWebTokenError
+        | jwt.NotBeforeError
+        | jwt.TokenExpiredError
+        | null,
+      result: object | undefined
+    ) => {
+      if (error) {
+        return res.status(403).json({
+          message: 'Provided token is invalid.',
+          errorKey: 'auth.login.invalid_token',
+          error,
+        })
+      }
+
+      return res.status(200).json({
+        message: 'Provided token is valid.',
+        user: result,
+      })
+    }
+  )
+}
+
 export default {
   login,
+  user,
 }

@@ -152,7 +152,7 @@ module.exports = {
             propertyName: 'token',
           },
           logout: false,
-          user: false, // { url: '/api/auth/user', method: 'get', propertyName: 'user' },
+          user: { url: '/api/auth/user', method: 'get', propertyName: 'user' },
         },
         tokenRequired: true,
         tokenType: '',
