@@ -10,7 +10,22 @@
     "not_found": "Route not found",
     "admin": {
       "users": {
-        "nav-item": "Users list"
+        "nav-item": "Users list",
+        "title": "User list",
+        "filter": {
+          "all": "All",
+          "admin": "Administrators",
+          "moderator": "Moderators",
+          "user": "Users",
+          "search": "Search"
+        },
+        "list": {
+          "username": "Username",
+          "role": "Role",
+          "email": "Email address",
+          "createdAt": "Created at",
+          "language": "Language"
+        }
       }
     }
   },

@@ -10,7 +10,22 @@
     "not_found": "Page non trouvé",
     "admin": {
       "users": {
-        "nav-item": "Liste des utilisateurs"
+        "nav-item": "Liste des utilisateurs",
+        "title": "Liste des utilisateurs",
+        "filter": {
+          "all": "Tous",
+          "admin": "Administrateurs",
+          "moderator": "Modérateurs",
+          "user": "Utilisateurs",
+          "search": "Chercher"
+        },
+        "list": {
+          "username": "Nom d'utilisateur",
+          "role": "Rôle",
+          "email": "Adresse Email",
+          "createdAt": "Créé le",
+          "language": "Langue"
+        }
       }
     }
   },
