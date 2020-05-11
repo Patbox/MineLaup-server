@@ -12,7 +12,7 @@
         {{ $t('pages.login.title') }}
       </h1>
 
-      <form @submit="login">
+      <form ref="form" @submit.prevent="login">
         <div class="px-10 w-full md:1/3 mx-auto mb-6">
           <div
             v-if="errorMsg"
@@ -30,7 +30,7 @@
           class="w-full sm:px-10 mb-6"
           :label="$t('pages.login.username')"
           icon="user"
-          :error="errors.username ? $(errors.username.error) : ''"
+          :error="errors.username ? $t(errors.username.errorKey) : ''"
         />
 
         <t-input
@@ -40,7 +40,7 @@
           :label="$t('pages.login.password')"
           icon="lock"
           type="password"
-          :error="errors.password ? $(errors.password.error) : ''"
+          :error="errors.password ? $t(errors.password.errorKey) : ''"
         />
 
         <div class="w-full text-center">
@@ -74,6 +74,24 @@ export default class Login extends Vue {
     password: '',
   }
 
-  login() {}
+  login() {
+    this.errorMsg = ''
+    this.errors = {}
+
+    this.$auth.loginWith('local', { data: this.form }).catch((error: any) => {
+      if (error.response?.status) {
+        switch (error.response.status) {
+          case 400:
+            this.errors = Object.assign({}, error.response.data.errors)
+            break
+          case 403:
+            this.errorMsg = error.response.data.errorKey
+            break
+          default:
+            this.errorMsg = 'error.unknown'
+        }
+      }
+    })
+  }
 }
 </script>

@@ -7,5 +7,16 @@
       "password": "Password",
       "btn": "Login"
     }
+  },
+  "auth": {
+    "login": {
+      "invalid": "Invalid username or password."
+    }
+  },
+  "error": {
+    "validation": {
+      "string_empty": "This field is required."
+    },
+    "unknown": "An unknown error happened. Please retry later."
   }
 }

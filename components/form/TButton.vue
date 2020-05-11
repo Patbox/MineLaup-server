@@ -10,7 +10,6 @@
     ]"
     :disabled="disabled"
     :type="type"
-    @click.prevent="onClick"
   >
     <i
       v-if="icon"
@@ -32,9 +31,6 @@
 import { Vue, Component, Prop } from 'nuxt-property-decorator'
 @Component
 export default class Button extends Vue {
-  @Prop()
-  onClick!: Function
-
   @Prop({ default: 'gray-800' })
   hoverColor!: String
 

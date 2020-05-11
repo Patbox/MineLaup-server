@@ -7,5 +7,16 @@
       "password": "Mot de passe",
       "btn": "Connexion"
     }
+  },
+  "auth": {
+    "login": {
+      "invalid": "Nom d'utilisateur ou mot de passe invalide."
+    }
+  },
+  "error": {
+    "validation": {
+      "string_empty": "Ce champ est requis."
+    },
+    "unknown": "Une erreur inconnue est survenue. Merci de réessayer plus tard."
   }
 }
