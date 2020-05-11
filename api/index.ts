@@ -55,7 +55,7 @@ sequelize.sync().then(async () => {
     const adminUser = new Users({
       username: userConfig.username,
       password: userConfig.password,
-      role: UserRole.user,
+      role: UserRole.superadmin,
       language: userConfig.language,
     })
 
