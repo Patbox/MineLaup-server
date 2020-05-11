@@ -10,6 +10,7 @@
     ]"
     :disabled="disabled"
     :type="type"
+    @click="$emit('click')"
   >
     <i
       v-if="icon"

@@ -3,23 +3,21 @@ import TButton from '~/components/form/TButton'
 
 describe('TButton component', () => {
   it('Should run function on click', () => {
+    const onClick = jest.fn()
     const wrapper = mount(TButton, {
-      propsData: {
-        onClick: () => {
-          wrapper.vm.$emit('button-clicked')
-        },
+      listeners: {
+        click: onClick,
       },
     })
 
     wrapper.trigger('click')
-    expect(Object.keys(wrapper.emitted())[0]).toBe('button-clicked')
+    expect(onClick).toHaveBeenCalled()
   })
 
   it('Should be disabled', () => {
     const wrapper = mount(TButton, {
       propsData: {
         disabled: true,
-        onClick: () => {},
       },
     })
 
@@ -30,7 +28,6 @@ describe('TButton component', () => {
     const wrapper = mount(TButton, {
       propsData: {
         icon: 'user',
-        onClick: () => {},
       },
     })
 
