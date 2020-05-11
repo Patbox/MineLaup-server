@@ -7,7 +7,12 @@
       "password": "Password",
       "btn": "Login"
     },
-    "not_found": "Route not found"
+    "not_found": "Route not found",
+    "admin": {
+      "users": {
+        "nav-item": "Users list"
+      }
+    }
   },
   "auth": {
     "login": {

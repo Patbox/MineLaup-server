@@ -7,7 +7,12 @@
       "password": "Mot de passe",
       "btn": "Connexion"
     },
-    "not_found": "Page non trouvé"
+    "not_found": "Page non trouvé",
+    "admin": {
+      "users": {
+        "nav-item": "Liste des utilisateurs"
+      }
+    }
   },
   "auth": {
     "login": {

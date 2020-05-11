@@ -4,7 +4,7 @@
 
     <div class="flex flex-1 flex-row">
       <div
-        class="flex-none flex flex-col items-center text-center bg-gray-700 text-gray-400 border-r w-12"
+        class="flex-none flex flex-col items-center text-center bg-gray-700 text-gray-400 w-12"
       >
         <ul class="mt-2">
           <t-side-bar-button
