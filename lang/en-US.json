@@ -6,7 +6,8 @@
       "username": "Username",
       "password": "Password",
       "btn": "Login"
-    }
+    },
+    "not_found": "Route not found"
   },
   "auth": {
     "login": {
@@ -18,5 +19,12 @@
       "string_empty": "This field is required."
     },
     "unknown": "An unknown error happened. Please retry later."
+  },
+  "layout": {
+    "side-bar": {
+      "launcher": "Launchers",
+      "modpacks": "Modpacks",
+      "administration": "Administration"
+    }
   }
 }

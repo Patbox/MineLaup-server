@@ -25,14 +25,19 @@
 </template>
 
 <script lang="ts">
-import Vue from 'vue'
+import { Vue, Component } from 'nuxt-property-decorator'
 import Logo from '~/components/Logo.vue'
 
-export default Vue.extend({
+@Component({
   components: {
     Logo,
   },
 })
+export default class SideBarLayout extends Vue {
+  layout() {
+    return 'side-bar'
+  }
+}
 </script>
 
 <style>
@@ -43,7 +48,6 @@ export default Vue.extend({
 */
 .container {
   margin: 0 auto;
-  min-height: 100vh;
   display: flex;
   justify-content: center;
   align-items: center;

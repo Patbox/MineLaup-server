@@ -6,7 +6,8 @@
       "username": "Nom d'utilisateur",
       "password": "Mot de passe",
       "btn": "Connexion"
-    }
+    },
+    "not_found": "Page non trouvé"
   },
   "auth": {
     "login": {
@@ -18,5 +19,12 @@
       "string_empty": "Ce champ est requis."
     },
     "unknown": "Une erreur inconnue est survenue. Merci de réessayer plus tard."
+  },
+  "layout": {
+    "side-bar": {
+      "launcher": "Launchers",
+      "modpacks": "Pack de mods",
+      "administration": "Administration"
+    }
   }
 }
