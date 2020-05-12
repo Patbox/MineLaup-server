@@ -16,7 +16,7 @@
       <div class="w-12 text-right">
         <div ref="languageList">
           <a
-            class="border-b-2 border-transparent hover:border-white w-10 cursor-pointer py-1 select-none select-input"
+            class="border-b-2 border-transparent hover:border-white w-10 cursor-pointer py-1 select-none select-input transition ease-out duration-300"
             :class="{ 'border-white': showLanguageList }"
             @click="toggleList"
           >

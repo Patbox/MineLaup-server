@@ -17,10 +17,11 @@
       <input
         :id="id"
         :type="currentType"
-        class="appearance-none w-full bg-gray-300 rounded-full pl-10 py-2 px-4 placeholder-gray-700 focus:outline-none text-black shadow focus:shadow-lg"
+        class="appearance-none w-full bg-gray-300 rounded-full pl-10 py-2 px-4 placeholder-gray-700 focus:outline-none text-black shadow focus:shadow-lg transition ease-out duration-700"
         :class="{ 'pr-10': type === 'password' }"
         :placeholder="label"
         :value="value"
+        :autocomplete="autocomplete"
         @input="$emit('input', $event.target.value)"
       />
       <span
@@ -64,6 +65,9 @@ export default class TInput extends Vue {
   error!: string
 
   showPass: boolean = false
+
+  @Prop({ default: 'on' })
+  autocomplete!: string
 
   get currentType() {
     if (this.type === 'password') {
