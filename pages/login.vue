@@ -44,7 +44,12 @@
         />
 
         <div class="w-full text-center">
-          <t-button type="submit" icon="sign-in-alt" class="md:w-1/3 w-full">
+          <t-button
+            type="submit"
+            icon="sign-in-alt"
+            class="md:w-1/3 w-full"
+            color="white"
+          >
             {{ $t('pages.login.btn') }}
           </t-button>
         </div>

@@ -1,11 +1,19 @@
 <template>
   <button
-    class="px-4 py-2 border border-white rounded-full focus:outline-none"
+    class="px-4 py-2 border rounded-full focus:outline-none transition ease-out duration-300"
     :class="[
       !disabled ? 'hover:text-' + hoverColor : '',
+      'border-' + bgHoverColor,
       {
         'border-gray-600 text-gray-500 cursor-auto': disabled,
-        'hover:bg-white hover:text-transparent': !disabled,
+        ['text-' +
+        color +
+        ' bg-' +
+        bgColor +
+        ' hover:bg-' +
+        bgHoverColor +
+        ' hover:text-' +
+        hoverColor]: !disabled,
       },
     ]"
     :disabled="disabled"
@@ -20,7 +28,7 @@
         'fa-' + icon,
         {
           'border-gray-600 text-gray-500 cursor-auto': disabled,
-          'hover:bg-white hover:text-transparent': !disabled,
+          [' hover:text-' + hoverColor]: !disabled,
         },
       ]"
     ></i>
@@ -32,8 +40,17 @@
 import { Vue, Component, Prop } from 'nuxt-property-decorator'
 @Component
 export default class Button extends Vue {
-  @Prop({ default: 'gray-800' })
+  @Prop({ default: 'white' })
   hoverColor!: String
+
+  @Prop({ default: 'green-400' })
+  bgHoverColor!: string
+
+  @Prop({ default: 'transparent' })
+  bgColor!: string
+
+  @Prop({ default: 'gray-900' })
+  color!: string
 
   @Prop()
   disabled!: boolean
