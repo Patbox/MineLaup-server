@@ -33,7 +33,7 @@
             <li
               v-for="locale in locales"
               :key="locale.iso"
-              class="text-black border-b last:border-transparent border-grey-600 px-4 py-2 hover:bg-gray-200 cursor-pointer"
+              class="text-black border-b last:border-transparent border-gray-400 px-4 py-2 hover:bg-gray-200 cursor-pointer"
               :class="{ 'text-green-600': locale.code == $i18n.locale }"
               @click="changeLanguage(locale.code)"
             >
