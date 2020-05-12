@@ -47,5 +47,9 @@ export default class SideBar extends Vue {
   get hasAdminPermission() {
     return this.$auth.user.role >= UserRole.admin
   }
+
+  async asyncData() {
+    await this.$auth.fetchUser()
+  }
 }
 </script>
