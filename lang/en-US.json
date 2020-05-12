@@ -26,7 +26,8 @@
           "createdAt": "Created at",
           "language": "Language"
         }
-      }
+      },
+      "administration": "Administration"
     }
   },
   "auth": {

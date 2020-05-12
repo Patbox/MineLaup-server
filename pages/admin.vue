@@ -1,7 +1,7 @@
 <template>
   <div class="flex flex-row">
     <t-side-bar-menu>
-      <t-side-bar-group name="test">
+      <t-side-bar-group :name="$t('pages.admin.administration')">
         <t-side-bar-item to="/admin" exact>Item</t-side-bar-item>
         <t-side-bar-item to="/admin/users">
           {{ $t('pages.admin.users.nav-item') }}

@@ -8,6 +8,7 @@
         <div class="flex flex-row mb-1 shadow rounded-full">
           <div class="relative">
             <select
+              v-model="search.itemsNb"
               class="appearance-none w-full bg-gray-300 rounded-l-full py-2 px-5 placeholder-gray-700 focus:outline-none text-black"
             >
               <option value="5">5</option>
@@ -22,6 +23,7 @@
           </div>
           <div class="relative">
             <select
+              v-model="search.type"
               class="appearance-none w-full bg-gray-300 py-2 px-5 placeholder-gray-700 focus:outline-none text-black"
             >
               <option value="-1">
@@ -50,6 +52,7 @@
               <i class="fas fa-search"></i>
             </span>
             <input
+              v-model="search.filterText"
               :placeholder="$t('pages.admin.users.filter.search')"
               class="appearance-none w-full bg-gray-300 rounded-r-full pl-10 py-2 px-4 placeholder-gray-700 focus:outline-none text-black"
             />
@@ -57,7 +60,7 @@
         </div>
       </div>
 
-      <div class="-mx-4 sm:-mx-8 px-4 sm:px-8 py-4 overflow-x-auto">
+      <div class="px-4 py-4 overflow-x-auto">
         <div class="inline-block min-w-full shadow rounded-lg overflow-hidden">
           <table class="min-w-full leading-normal">
             <thead>
@@ -91,7 +94,7 @@
             </thead>
             <tbody>
               <tr v-for="(user, index) in users" :key="index">
-                <td>
+                <td class="py-4">
                   {{ user.username }}
                 </td>
                 <td>
@@ -101,7 +104,7 @@
                   {{ user.role }}
                 </td>
                 <td>
-                  {{ user.createdAt }}
+                  {{ parsedDate(user.createdAt) }}
                 </td>
                 <td>
                   {{ user.language }}
@@ -117,17 +120,93 @@
 
 <script lang="ts">
 import { Vue, Component } from 'nuxt-property-decorator'
+import { format } from 'date-fns'
 
 @Component
 export default class UsersList extends Vue {
   users = []
 
+  search = {
+    itemsNb: '5',
+    type: '-1',
+    filterText: '',
+  }
+
   // @ts-ignore
   async asyncData({ $axios }) {
-    const users = await $axios.$get('/api/admin/users')
+    const users = await $axios.$get('/api/admin/users', {
+      query: {
+        items: '5',
+        type: '-1',
+        filter: '',
+      },
+    })
     return {
-      users,
+      users: [
+        ...users,
+        {
+          id: 'eferfer',
+          username: 'test',
+          email: null,
+          role: 0,
+          createdAt: new Date().toISOString(),
+          language: 'en',
+        },
+        {
+          id: 'eferfer',
+          username: 'test',
+          email: null,
+          role: 0,
+          createdAt: new Date().toISOString(),
+          language: 'en',
+        },
+        {
+          id: 'eferfer',
+          username: 'test',
+          email: null,
+          role: 0,
+          createdAt: new Date().toISOString(),
+          language: 'en',
+        },
+        {
+          id: 'eferfer',
+          username: 'test',
+          email: null,
+          role: 0,
+          createdAt: new Date().toISOString(),
+          language: 'en',
+        },
+        {
+          id: 'eferfer',
+          username: 'test',
+          email: null,
+          role: 0,
+          createdAt: new Date().toISOString(),
+          language: 'en',
+        },
+        {
+          id: 'eferfer',
+          username: 'test',
+          email: null,
+          role: 0,
+          createdAt: new Date().toISOString(),
+          language: 'en',
+        },
+        {
+          id: 'eferfer',
+          username: 'test',
+          email: null,
+          role: 0,
+          createdAt: new Date().toISOString(),
+          language: 'en',
+        },
+      ],
     }
+  }
+
+  parsedDate(dateISO: Date): string {
+    const formatedDate = format(new Date(dateISO), 'P')
+    return formatedDate
   }
 }
 </script>
