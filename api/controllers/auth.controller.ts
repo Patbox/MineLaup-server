@@ -80,31 +80,37 @@ async function user(req: Request, res: Response) {
     })
   }
 
-  await jwt.verify(
-    token,
-    config.get().jwt_token,
-    (
-      error:
-        | jwt.JsonWebTokenError
-        | jwt.NotBeforeError
-        | jwt.TokenExpiredError
-        | null,
-      result: object | undefined
-    ) => {
-      if (error) {
-        return res.status(403).json({
-          message: 'Provided token is invalid.',
-          errorKey: 'auth.login.invalid_token',
-          error,
-        })
-      }
-
-      return res.status(200).json({
-        message: 'Provided token is valid.',
-        user: result,
+  await jwt.verify(token, config.get().jwt_token, async function (
+    error:
+      | jwt.JsonWebTokenError
+      | jwt.NotBeforeError
+      | jwt.TokenExpiredError
+      | null,
+    result: object | undefined
+  ) {
+    if (error) {
+      return res.status(403).json({
+        message: 'Provided token is invalid.',
+        errorKey: 'auth.login.invalid_token',
+        error,
       })
     }
-  )
+
+    // @ts-ignore
+    const user = await Users.findOne({ where: { id: result.id } })
+
+    if (user) {
+      return res.status(200).json({
+        message: 'Provided token is valid.',
+        user,
+      })
+    }
+
+    return res.status(403).json({
+      message: 'Provided token is invalid.',
+      errorKey: 'auth.login.invalid_token',
+    })
+  })
 }
 
 export default {
