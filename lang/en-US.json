@@ -10,20 +10,38 @@
     "not_found": "Route not found",
     "admin": {
       "users": {
-        "nav-item": "Users list",
-        "title": "User list",
-        "filter": {
-          "all": "All",
-          "admin": "Administrators",
-          "moderator": "Moderators",
-          "user": "Users",
-          "search": "Search"
-        },
+        "title": "Users",
         "list": {
+          "title": "Users list",
+          "filter": {
+            "all": "All",
+            "admin": "Administrators",
+            "moderator": "Moderators",
+            "user": "Users",
+            "search": "Search"
+          },
+          "table": {
+            "username": "Username",
+            "role": "Role",
+            "email": "Email address",
+            "createdAt": "Created at",
+            "language": "Language",
+            "actions": "Actions"
+          },
+          "modal": {
+            "title": "Delete the account ?",
+            "description": "Wait ! You are going to delete the account of one of your user ! Are you really sure of what you're doing ?",
+            "delete-btn": "It's okay ! Delete it.",
+            "cancel-btn": "Forget it"
+          }
+        },
+        "create": {
+          "title": "Create user",
           "username": "Username",
-          "role": "Role",
+          "password": "Password",
           "email": "Email address",
-          "createdAt": "Created at",
+          "submit": "Create",
+          "role": "Role",
           "language": "Language"
         }
       },

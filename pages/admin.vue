@@ -1,10 +1,12 @@
 <template>
   <div class="flex flex-row">
     <t-side-bar-menu>
-      <t-side-bar-group :name="$t('pages.admin.administration')">
-        <t-side-bar-item to="/admin" exact>Item</t-side-bar-item>
-        <t-side-bar-item to="/admin/users">
-          {{ $t('pages.admin.users.nav-item') }}
+      <t-side-bar-group :name="$t('pages.admin.users.title')">
+        <t-side-bar-item to="/admin/users" exact>
+          {{ $t('pages.admin.users.list.title') }}
+        </t-side-bar-item>
+        <t-side-bar-item to="/admin/users/create" exact>
+          {{ $t('pages.admin.users.create.title') }}
         </t-side-bar-item>
       </t-side-bar-group>
     </t-side-bar-menu>
@@ -26,6 +28,7 @@ import TSideBarItem from '~/components/sidebar/TSideBarItem.vue'
     TSideBarGroup,
     TSideBarItem,
   },
+  middleware: ['is-admin'],
 })
 export default class Admin extends Vue {
   layout() {

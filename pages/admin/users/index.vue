@@ -5,7 +5,7 @@
     </h1>
     <div class="container flex-col mx-auto px-4 sm:px-8">
       <div class="my-2">
-        <div class="flex flex-row mb-1 shadow rounded-full">
+        <div class="flex flex-row mb-1 shadow rounded-full max-w-lg mx-auto">
           <div class="relative">
             <select
               v-model="search.itemsNb"
@@ -27,16 +27,16 @@
               class="appearance-none w-full bg-gray-300 py-2 px-5 placeholder-gray-700 focus:outline-none text-black"
             >
               <option value="-1">
-                {{ $t('pages.admin.users.filter.all') }}
+                {{ $t('pages.admin.users.list.filter.all') }}
               </option>
               <option value="2">
-                {{ $t('pages.admin.users.filter.admin') }}
+                {{ $t('pages.admin.users.list.filter.admin') }}
               </option>
               <option value="1">
-                {{ $t('pages.admin.users.filter.moderator') }}
+                {{ $t('pages.admin.users.list.filter.moderator') }}
               </option>
               <option value="0">
-                {{ $t('pages.admin.users.filter.user') }}
+                {{ $t('pages.admin.users.list.filter.user') }}
               </option>
             </select>
             <div
@@ -45,7 +45,7 @@
               <i class="fas fa-caret-down"></i>
             </div>
           </div>
-          <div class="block relative">
+          <div class="block relative flex-1">
             <span
               class="h-full absolute inset-y-0 left-0 flex items-center pl-2"
             >
@@ -53,7 +53,7 @@
             </span>
             <input
               v-model="search.filterText"
-              :placeholder="$t('pages.admin.users.filter.search')"
+              :placeholder="$t('pages.admin.users.list.filter.search')"
               class="appearance-none w-full bg-gray-300 rounded-r-full pl-10 py-2 px-4 placeholder-gray-700 focus:outline-none text-black"
             />
           </div>
@@ -68,27 +68,32 @@
                 <th
                   class="px-5 py-3 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-600 uppercase tracking-wide"
                 >
-                  {{ $t('pages.admin.users.list.username') }}
+                  {{ $t('pages.admin.users.list.table.username') }}
                 </th>
                 <th
                   class="px-5 py-3 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-600 uppercase tracking-wide"
                 >
-                  {{ $t('pages.admin.users.list.email') }}
+                  {{ $t('pages.admin.users.list.table.email') }}
                 </th>
                 <th
                   class="px-5 py-3 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-600 uppercase tracking-wide"
                 >
-                  {{ $t('pages.admin.users.list.role') }}
+                  {{ $t('pages.admin.users.list.table.role') }}
                 </th>
                 <th
                   class="px-5 py-3 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-600 uppercase tracking-wide"
                 >
-                  {{ $t('pages.admin.users.list.createdAt') }}
+                  {{ $t('pages.admin.users.list.table.createdAt') }}
                 </th>
                 <th
                   class="px-5 py-3 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-600 uppercase tracking-wide"
                 >
-                  {{ $t('pages.admin.users.list.language') }}
+                  {{ $t('pages.admin.users.list.table.language') }}
+                </th>
+                <th
+                  class="px-5 py-3 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-600 uppercase tracking-wide"
+                >
+                  {{ $t('pages.admin.users.list.table.actions') }}
                 </th>
               </tr>
             </thead>
@@ -109,22 +114,65 @@
                 <td>
                   {{ user.language }}
                 </td>
+                <td>
+                  <div class="flex justify-around">
+                    <span
+                      class="cursor-pointer text-gray-600 hover:text-gray-500 transition ease-out duration-200 select-none"
+                    >
+                      <i class="fas fa-edit"></i>
+                    </span>
+                    <span
+                      class="cursor-pointer text-gray-600 hover:text-red-600 transition ease-out duration-200 select-none"
+                      @click="openModal(user)"
+                    >
+                      <i class="fas fa-trash"></i>
+                    </span>
+                  </div>
+                </td>
               </tr>
             </tbody>
           </table>
         </div>
       </div>
     </div>
+    <t-modal v-if="modalOpened">
+      <h1 slot="title">
+        {{ $t('pages.admin.users.list.modal.title') }}
+      </h1>
+      <p slot="description">
+        {{ $t('pages.admin.users.list.modal.description') }}
+      </p>
+      <div slot="actions" class="flex flex-col items-center">
+        <t-button bg-hover-color="red-600" class="flex-1 mb-2 md:w-1/2">
+          {{ $t('pages.admin.users.list.modal.delete-btn') }}
+        </t-button>
+        <t-button
+          class="flex-1 md:w-1/2"
+          bg-hover-color="gray-800"
+          @click="closeModal"
+        >
+          {{ $t('pages.admin.users.list.modal.cancel-btn') }}
+        </t-button>
+      </div>
+    </t-modal>
   </div>
 </template>
 
 <script lang="ts">
 import { Vue, Component } from 'nuxt-property-decorator'
 import { format } from 'date-fns'
+import TModal from '~/components/TModal.vue'
+import TButton from '~/components/form/TButton.vue'
 
-@Component
+@Component({
+  components: {
+    TModal,
+    TButton,
+  },
+})
 export default class UsersList extends Vue {
-  users = []
+  modalOpened = false
+  selectedUser: object | null = {}
 
   search = {
     itemsNb: '5',
@@ -142,71 +190,23 @@ export default class UsersList extends Vue {
       },
     })
     return {
-      users: [
-        ...users,
-        {
-          id: 'eferfer',
-          username: 'test',
-          email: null,
-          role: 0,
-          createdAt: new Date().toISOString(),
-          language: 'en',
-        },
-        {
-          id: 'eferfer',
-          username: 'test',
-          email: null,
-          role: 0,
-          createdAt: new Date().toISOString(),
-          language: 'en',
-        },
-        {
-          id: 'eferfer',
-          username: 'test',
-          email: null,
-          role: 0,
-          createdAt: new Date().toISOString(),
-          language: 'en',
-        },
-        {
-          id: 'eferfer',
-          username: 'test',
-          email: null,
-          role: 0,
-          createdAt: new Date().toISOString(),
-          language: 'en',
-        },
-        {
-          id: 'eferfer',
-          username: 'test',
-          email: null,
-          role: 0,
-          createdAt: new Date().toISOString(),
-          language: 'en',
-        },
-        {
-          id: 'eferfer',
-          username: 'test',
-          email: null,
-          role: 0,
-          createdAt: new Date().toISOString(),
-          language: 'en',
-        },
-        {
-          id: 'eferfer',
-          username: 'test',
-          email: null,
-          role: 0,
-          createdAt: new Date().toISOString(),
-          language: 'en',
-        },
-      ],
+      users,
     }
   }
 
   parsedDate(dateISO: Date): string {
     const formatedDate = format(new Date(dateISO), 'P')
     return formatedDate
+  }
+
+  openModal(user: any) {
+    this.modalOpened = true
+    this.selectedUser = user
+  }
+
+  closeModal() {
+    this.modalOpened = false
+    this.selectedUser = null
   }
 }
 </script>

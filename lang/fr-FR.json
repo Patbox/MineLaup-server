@@ -10,21 +10,38 @@
     "not_found": "Page non trouvé",
     "admin": {
       "users": {
-        "nav-item": "Liste des utilisateurs",
-        "title": "Liste des utilisateurs",
-        "filter": {
-          "all": "Tous",
-          "admin": "Administrateurs",
-          "moderator": "Modérateurs",
-          "user": "Utilisateurs",
-          "search": "Chercher"
-        },
+        "title": "Utilisateurs",
         "list": {
+          "title": "Liste des utilisateurs",
+          "filter": {
+            "all": "Tous",
+            "admin": "Administrateurs",
+            "moderator": "Modérateurs",
+            "user": "Utilisateurs",
+            "search": "Chercher"
+          },
+          "table": {
+            "username": "Nom d'utilisateur",
+            "role": "Rôle",
+            "email": "Adresse Email",
+            "createdAt": "Créé le",
+            "language": "Langue",
+            "actions": "Actions"
+          },
+          "modal": {
+            "title": "Supprimer le compte ?",
+            "description": "Attend ! Tu es sur le point de supprimer le compte d'un de tes utilisateurs ! Es-tu sûr de ce que tu fais ?",
+            "delete-btn": "Tout va bien ! Supprime le.",
+            "cancel-btn": "Laisse tomber"
+          }
+        },
+        "create": {
+          "title": "Créer un utilisateur",
           "username": "Nom d'utilisateur",
-          "role": "Rôle",
+          "password": "Mot de passe",
           "email": "Adresse Email",
-          "createdAt": "Créé le",
-          "language": "Langue"
+          "submit": "Créer",
+          "role": "Rôle"
         }
       },
       "administration": "Administration"
