@@ -10,7 +10,7 @@ async function login(req: Request, res: Response) {
     password: Joi.string().required(),
   })
 
-  const { error }: ValidationResult = await schema.validate(req.body, {
+  const { error }: ValidationResult = schema.validate(req.body, {
     abortEarly: false,
   })
 
