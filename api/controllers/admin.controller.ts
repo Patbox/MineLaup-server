@@ -1,9 +1,55 @@
 import { Request, Response } from 'express'
 import Joi, { ValidationResult } from '@hapi/joi'
+import { Op } from 'sequelize'
 import Users from '../models/Users.model'
 import { UserRole } from '../../types/UserRole'
 
-async function users(_req: Request, res: Response) {
+async function users(req: Request, res: Response) {
+  const schema = Joi.object({
+    items: Joi.string().alphanum().allow('').optional(),
+    type: Joi.string().allow('').optional(),
+    filter: Joi.string().alphanum().allow('').optional(),
+    page: Joi.string().alphanum().allow('').optional(),
+  })
+
+  const { error, value: searchArgs }: ValidationResult = schema.validate(
+    req.query
+  )
+
+  if (error) {
+    const formatedErrors: any = {}
+
+    for (const e of error.details) {
+      formatedErrors[e.path[0]] = {
+        message: e.message,
+        errorKey: `error.validation.${e.type.replace(/\./g, '_')}`,
+      }
+    }
+
+    return res.status(400).send({
+      errors: formatedErrors,
+    })
+  }
+
+  let role: any
+
+  switch (parseInt(searchArgs.type)) {
+    case 2:
+      role = { [Op.gte]: 2 }
+      break
+    case 1:
+    case 0:
+      role = { [Op.eq]: searchArgs.type }
+      break
+    default:
+      role = { [Op.in]: [0, 1, 2, 3] }
+  }
+
+  const username =
+    searchArgs.filter.length > 0
+      ? { [Op.substring]: searchArgs.filter }
+      : { [Op.not]: '' }
+
   try {
     const users = await Users.findAll({
       attributes: [
@@ -15,11 +61,17 @@ async function users(_req: Request, res: Response) {
         'createdAt',
         'colorMode',
       ],
+      limit: parseInt(searchArgs.items),
+      offset: parseInt(searchArgs.items) * parseInt(searchArgs.page),
+      where: {
+        role,
+        username,
+      },
     })
 
     return res.status(200).send(users)
   } catch (error) {
-    return res.status(500).send(error)
+    return res.status(500).send({ error })
   }
 }
 
@@ -72,7 +124,7 @@ async function deleteUser(req: Request, res: Response) {
   const schema = Joi.object({
     id: Joi.string().required(),
   })
-  const { error } = schema.validate(req.body)
+  const { error } = schema.validate(req.query)
 
   if (error) {
     const formatedErrors: any = {}
@@ -92,7 +144,7 @@ async function deleteUser(req: Request, res: Response) {
   try {
     await Users.destroy({
       where: {
-        id: req.body.id,
+        id: req.query.id,
       },
     })
 

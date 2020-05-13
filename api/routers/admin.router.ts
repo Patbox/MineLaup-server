@@ -6,6 +6,6 @@ const router = Router()
 
 router.get('/users', isAdminMiddleware, AdminController.users)
 router.post('/create-user', isAdminMiddleware, AdminController.createUser)
-router.post('/delete-user', isAdminMiddleware, AdminController.deleteUser)
+router.delete('/delete-user', isAdminMiddleware, AdminController.deleteUser)
 
 export default router
