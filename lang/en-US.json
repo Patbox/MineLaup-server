@@ -31,7 +31,7 @@
           "modal": {
             "title": "Delete the account ?",
             "description": "Wait ! You are going to delete the account of one of your user ! Are you really sure of what you're doing ?",
-            "delete-btn": "It's okay ! Delete it.",
+            "delete-btn": "It's okay ! Delete it",
             "cancel-btn": "Forget it"
           }
         },

@@ -8,7 +8,7 @@
         <div class="flex flex-row mb-1 shadow rounded-full max-w-lg mx-auto">
           <div class="relative">
             <select
-              v-model="search.itemsNb"
+              v-model="search.items"
               class="appearance-none w-full bg-gray-300 rounded-l-full py-2 px-5 placeholder-gray-700 focus:outline-none text-black"
             >
               <option value="5">5</option>
@@ -52,7 +52,7 @@
               <i class="fas fa-search"></i>
             </span>
             <input
-              v-model="search.filterText"
+              v-model="search.filter"
               :placeholder="$t('pages.admin.users.list.filter.search')"
               class="appearance-none w-full bg-gray-300 rounded-r-full pl-10 py-2 px-4 placeholder-gray-700 focus:outline-none text-black"
             />
@@ -143,7 +143,11 @@
         {{ $t('pages.admin.users.list.modal.description') }}
       </p>
       <div slot="actions" class="flex flex-col items-center">
-        <t-button bg-hover-color="red-600" class="flex-1 mb-2 md:w-1/2">
+        <t-button
+          bg-hover-color="red-600"
+          class="flex-1 mb-2 md:w-1/2"
+          @click="deleteUser"
+        >
           {{ $t('pages.admin.users.list.modal.delete-btn') }}
         </t-button>
         <t-button
@@ -159,8 +163,10 @@
 </template>
 
 <script lang="ts">
-import { Vue, Component } from 'nuxt-property-decorator'
+import { Context } from 'vm'
+import { Vue, Component, Watch } from 'nuxt-property-decorator'
 import { format } from 'date-fns'
+import debounce from 'lodash.debounce'
 import TModal from '~/components/TModal.vue'
 import TButton from '~/components/form/TButton.vue'
 
@@ -172,23 +178,25 @@ import TButton from '~/components/form/TButton.vue'
 })
 export default class UsersList extends Vue {
   modalOpened = false
-  selectedUser: object | null = {}
+  selectedUser: { id: string } | null = null
+  users: any = []
 
   search = {
-    itemsNb: '5',
+    items: '5',
     type: '-1',
-    filterText: '',
+    filter: '',
   }
 
-  // @ts-ignore
-  async asyncData({ $axios }) {
+  async asyncData({ $axios }: Context) {
     const users = await $axios.$get('/api/admin/users', {
-      query: {
+      params: {
         items: '5',
         type: '-1',
         filter: '',
+        page: '0',
       },
     })
+
     return {
       users,
     }
@@ -207,6 +215,46 @@ export default class UsersList extends Vue {
   closeModal() {
     this.modalOpened = false
     this.selectedUser = null
+  }
+
+  async deleteUser() {
+    if (this.selectedUser !== null) {
+      try {
+        await this.$axios.delete('/api/admin/delete-user', {
+          params: {
+            id: this.selectedUser.id,
+          },
+        })
+
+        this.users = this.users.filter((user: { id: string }) => {
+          // @ts-ignore
+          return user.id !== this.selectedUser.id
+        })
+        this.closeModal()
+      } catch (error) {
+        console.error(error.response.message)
+      }
+    }
+  }
+
+  searchByFilter = () =>
+    new Promise(
+      debounce(async (resolve) => {
+        const users = await this.$axios.$get('/api/admin/users', {
+          params: {
+            items: this.search.items,
+            type: this.search.type,
+            filter: this.search.filter,
+            page: '0',
+          },
+        })
+        resolve(users)
+      }, 1000)
+    )
+
+  @Watch('search', { deep: true })
+  async onTypingSearch() {
+    this.users = await this.searchByFilter()
   }
 }
 </script>
