@@ -49,9 +49,17 @@ async function users(req: Request, res: Response) {
     searchArgs.filter.length > 0
       ? { [Op.substring]: searchArgs.filter }
       : { [Op.not]: '' }
+  const items =
+    !isNaN(searchArgs.items) && parseInt(searchArgs.items)
+      ? parseInt(searchArgs.items)
+      : 0
+  const page =
+    !isNaN(searchArgs.page) && parseInt(searchArgs.page)
+      ? parseInt(searchArgs.page)
+      : 0
 
   try {
-    const users = await Users.findAll({
+    const { count, rows } = await Users.findAndCountAll({
       attributes: [
         'id',
         'username',
@@ -61,15 +69,20 @@ async function users(req: Request, res: Response) {
         'createdAt',
         'colorMode',
       ],
-      limit: parseInt(searchArgs.items),
-      offset: parseInt(searchArgs.items) * parseInt(searchArgs.page),
+      limit: items,
+      offset: items * page,
       where: {
         role,
         username,
       },
+      raw: true,
     })
 
-    return res.status(200).send(users)
+    return res.status(200).send({
+      users: rows,
+      current: page + 1,
+      total: Math.ceil(count / items),
+    })
   } catch (error) {
     return res.status(500).send({ error })
   }
