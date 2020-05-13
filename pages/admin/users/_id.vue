@@ -4,61 +4,63 @@
       {{ $t('pages.admin.users.title') }}
     </h1>
     <div class="container flex-col mx-auto px-4 sm:px-8">
-      <div class="my-2">
-        <div class="flex flex-row mb-1 shadow rounded-full max-w-lg mx-auto">
-          <div class="relative">
-            <select
-              v-model="search.items"
-              class="appearance-none w-full bg-gray-300 rounded-l-full py-2 px-5 placeholder-gray-700 focus:outline-none text-black"
-            >
-              <option value="5">5</option>
-              <option value="10">10</option>
-              <option value="20">20</option>
-            </select>
-            <div
-              class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700"
-            >
-              <i class="fas fa-caret-down"></i>
+      <keep-alive>
+        <div class="my-2">
+          <div class="flex flex-row mb-1 shadow rounded-full max-w-lg mx-auto">
+            <div class="relative">
+              <select
+                v-model="search.items"
+                class="appearance-none w-full bg-gray-300 rounded-l-full py-2 px-5 placeholder-gray-700 focus:outline-none text-black"
+              >
+                <option value="5">5</option>
+                <option value="10">10</option>
+                <option value="20">20</option>
+              </select>
+              <div
+                class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700"
+              >
+                <i class="fas fa-caret-down"></i>
+              </div>
             </div>
-          </div>
-          <div class="relative">
-            <select
-              v-model="search.type"
-              class="appearance-none w-full bg-gray-300 py-2 px-5 placeholder-gray-700 focus:outline-none text-black"
-            >
-              <option value="-1">
-                {{ $t('pages.admin.users.list.filter.all') }}
-              </option>
-              <option value="2">
-                {{ $t('pages.admin.users.list.filter.admin') }}
-              </option>
-              <option value="1">
-                {{ $t('pages.admin.users.list.filter.moderator') }}
-              </option>
-              <option value="0">
-                {{ $t('pages.admin.users.list.filter.user') }}
-              </option>
-            </select>
-            <div
-              class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700"
-            >
-              <i class="fas fa-caret-down"></i>
+            <div class="relative">
+              <select
+                v-model="search.type"
+                class="appearance-none w-full bg-gray-300 py-2 px-5 placeholder-gray-700 focus:outline-none text-black"
+              >
+                <option value="-1">
+                  {{ $t('pages.admin.users.list.filter.all') }}
+                </option>
+                <option value="2">
+                  {{ $t('pages.admin.users.list.filter.admin') }}
+                </option>
+                <option value="1">
+                  {{ $t('pages.admin.users.list.filter.moderator') }}
+                </option>
+                <option value="0">
+                  {{ $t('pages.admin.users.list.filter.user') }}
+                </option>
+              </select>
+              <div
+                class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700"
+              >
+                <i class="fas fa-caret-down"></i>
+              </div>
             </div>
-          </div>
-          <div class="block relative flex-1">
-            <span
-              class="h-full absolute inset-y-0 left-0 flex items-center pl-2"
-            >
-              <i class="fas fa-search"></i>
-            </span>
-            <input
-              v-model="search.filter"
-              :placeholder="$t('pages.admin.users.list.filter.search')"
-              class="appearance-none w-full bg-gray-300 rounded-r-full pl-10 py-2 px-4 placeholder-gray-700 focus:outline-none text-black"
-            />
+            <div class="block relative flex-1">
+              <span
+                class="h-full absolute inset-y-0 left-0 flex items-center pl-2"
+              >
+                <i class="fas fa-search"></i>
+              </span>
+              <input
+                :placeholder="$t('pages.admin.users.list.filter.search')"
+                class="appearance-none w-full bg-gray-300 rounded-r-full pl-10 py-2 px-4 placeholder-gray-700 focus:outline-none text-black"
+                @input="debounceSearch($event.target.value)"
+              />
+            </div>
           </div>
         </div>
-      </div>
+      </keep-alive>
 
       <div class="px-4 py-4 overflow-x-auto">
         <div class="inline-block min-w-full shadow rounded-lg overflow-hidden">
@@ -116,11 +118,13 @@
                 </td>
                 <td>
                   <div class="flex justify-around">
-                    <span
+                    <nuxt-link
+                      tag="span"
+                      :to="'/admin/users/edit/' + user.id"
                       class="cursor-pointer text-gray-600 hover:text-gray-500 transition ease-out duration-200 select-none"
                     >
                       <i class="fas fa-edit"></i>
-                    </span>
+                    </nuxt-link>
                     <span
                       class="cursor-pointer text-gray-600 hover:text-red-600 transition ease-out duration-200 select-none"
                       @click="openModal(user)"
@@ -134,6 +138,12 @@
           </table>
         </div>
       </div>
+
+      <t-paginate
+        :current="pageId"
+        :last="total"
+        :change-page="changePage"
+      ></t-paginate>
     </div>
     <t-modal v-if="modalOpened">
       <h1 slot="title">
@@ -163,23 +173,27 @@
 </template>
 
 <script lang="ts">
-import { Context } from 'vm'
 import { Vue, Component, Watch } from 'nuxt-property-decorator'
 import { format } from 'date-fns'
-import debounce from 'lodash.debounce'
+import { debounce } from 'lodash'
+import { Context } from '@nuxt/types'
 import TModal from '~/components/TModal.vue'
 import TButton from '~/components/form/TButton.vue'
+import TPaginate from '~/components/TPaginate.vue'
 
 @Component({
   components: {
     TModal,
     TButton,
+    TPaginate,
   },
 })
 export default class UsersList extends Vue {
   modalOpened = false
   selectedUser: { id: string } | null = null
   users: any = []
+  total: number = 1
+  current: number = 1
 
   search = {
     items: '5',
@@ -187,24 +201,55 @@ export default class UsersList extends Vue {
     filter: '',
   }
 
-  async asyncData({ $axios }: Context) {
-    const users = await $axios.$get('/api/admin/users', {
+  middleware({ route, redirect }: Context) {
+    if (
+      route.params.id === undefined ||
+      // @ts-ignore
+      isNaN(route.params.id) ||
+      parseInt(route.params.id) <= 0
+    ) {
+      redirect('/admin/users/1')
+    }
+  }
+
+  async asyncData({ $axios, route }: Context) {
+    const { total, current, users } = await $axios.$get('/api/admin/users', {
       params: {
         items: '5',
         type: '-1',
         filter: '',
-        page: '0',
+        page:
+          // @ts-ignore
+          isNaN(route.params.id) || parseInt(route.params.id) <= 0
+            ? 0
+            : parseInt(route.params.id) - 1,
       },
     })
 
     return {
       users,
+      total,
+      current,
     }
   }
 
+  mounted() {
+    Object.assign(this.search, {
+      items: this.$route.query.items
+        ? (this.$route.query.items as string)
+        : '5',
+      type: '-1',
+      filter: '',
+    })
+  }
+
   parsedDate(dateISO: Date): string {
-    const formatedDate = format(new Date(dateISO), 'P')
-    return formatedDate
+    try {
+      const formatedDate = format(new Date(dateISO), 'P')
+      return formatedDate
+    } catch (error) {
+      return ''
+    }
   }
 
   openModal(user: any) {
@@ -237,24 +282,46 @@ export default class UsersList extends Vue {
     }
   }
 
-  searchByFilter = () =>
-    new Promise(
-      debounce(async (resolve) => {
-        const users = await this.$axios.$get('/api/admin/users', {
-          params: {
-            items: this.search.items,
-            type: this.search.type,
-            filter: this.search.filter,
-            page: '0',
-          },
-        })
-        resolve(users)
-      }, 1000)
-    )
+  debounceSearch = debounce(function (value: string) {
+    // @ts-ignore
+    this.search.filter = value
+  }, 1000)
 
   @Watch('search', { deep: true })
-  async onTypingSearch() {
-    this.users = await this.searchByFilter()
+  async onSearchChange() {
+    const { total, current, users } = await this.$axios.$get(
+      '/api/admin/users',
+      {
+        params: {
+          items: this.search.items,
+          type: this.search.type,
+          filter: this.search.filter,
+          page: this.current - 1,
+        },
+      }
+    )
+    this.total = total
+    this.current = current
+    this.users = users
+  }
+
+  get pageId() {
+    // @ts-ignore
+    if (!isNaN(this.$route.params.id) && parseInt(this.$route.params.id) > 0) {
+      return parseInt(this.$route.params.id)
+    }
+    return 1
+  }
+
+  changePage(page: string) {
+    return {
+      path: '/admin/users/' + page,
+      query: {
+        filter: this.search.filter,
+        items: this.search.items,
+        type: this.search.type,
+      },
+    }
   }
 }
 </script>
