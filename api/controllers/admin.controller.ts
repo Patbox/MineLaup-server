@@ -68,7 +68,44 @@ async function createUser(req: Request, res: Response) {
   }
 }
 
+async function deleteUser(req: Request, res: Response) {
+  const schema = Joi.object({
+    id: Joi.string().required(),
+  })
+  const { error } = schema.validate(req.body)
+
+  if (error) {
+    const formatedErrors: any = {}
+
+    for (const e of error.details) {
+      formatedErrors[e.path[0]] = {
+        message: e.message,
+        errorKey: `error.validation.${e.type.replace(/\./g, '_')}`,
+      }
+    }
+
+    return res.status(400).send({
+      errors: formatedErrors,
+    })
+  }
+
+  try {
+    await Users.destroy({
+      where: {
+        id: req.body.id,
+      },
+    })
+
+    return res.status(200).send({
+      message: 'User deleted',
+    })
+  } catch (error) {
+    return res.status(500).send(error)
+  }
+}
+
 export default {
   users,
   createUser,
+  deleteUser,
 }
