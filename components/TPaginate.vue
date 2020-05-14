@@ -2,7 +2,7 @@
   <div class="flex flex-col items-center">
     <div class="flex text-gray-700">
       <nuxt-link
-        v-if="$route.params.id > 1"
+        v-if="current > 1"
         :to="changePage(current - 1)"
         class="h-10 w-10 mr-1 flex justify-center items-center rounded-full hover:bg-gray-200 cursor-pointer"
       >
@@ -23,7 +23,7 @@
       </nuxt-link>
 
       <nuxt-link
-        v-if="$route.params.id < last"
+        v-if="current < last"
         :to="changePage(current + 1)"
         class="h-10 w-10 mr-1 flex justify-center items-center rounded-full hover:bg-gray-200 cursor-pointer"
       >
