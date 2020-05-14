@@ -5,6 +5,17 @@
     </h1>
 
     <div class="my-2">
+      <div class="px-10 w-full md:1/3 mx-auto mb-6">
+        <div
+          v-if="errorMsg"
+          class="flex items-center bg-red-500 text-white text-sm font-bold px-4 py-3"
+          role="alert"
+        >
+          <i class="fas fa-exclamation-circle w-4 h-4 mr-2"></i>
+          <p>{{ $t(errorMsg) }}</p>
+        </div>
+      </div>
+
       <div class="flex flex-row mb-1 shadow rounded-full max-w-lg mx-auto">
         <div class="relative">
           <select
@@ -308,6 +319,7 @@ export default class UserList extends Vue {
         this.$router.push(this.changePage('0'))
       } catch (error) {
         console.error(error.response.message)
+        this.errorMsg = 'error.unknown'
       }
     }
   }

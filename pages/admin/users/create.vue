@@ -117,6 +117,7 @@ export default class CreateUser extends Vue {
           }
         } else {
           console.error(error)
+          this.errorMsg = 'error.unknown'
         }
       })
   }

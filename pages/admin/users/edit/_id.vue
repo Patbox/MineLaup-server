@@ -174,6 +174,7 @@ export default class UserEdit extends Vue {
           }
         } else {
           console.error(error)
+          this.errorMsg = 'error.unknown'
         }
       })
   }
