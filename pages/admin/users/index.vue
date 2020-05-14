@@ -320,6 +320,7 @@ export default class UserList extends Vue {
         this.closeModal()
         this.$router.push(this.changePage('0'))
       } catch (error) {
+        // eslint-disable-next-line
         console.error(error.response.message)
         this.errorMsg = 'error.unknown'
       }

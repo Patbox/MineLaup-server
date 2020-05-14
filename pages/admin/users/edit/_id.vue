@@ -173,6 +173,7 @@ export default class UserEdit extends Vue {
               this.errorMsg = 'error.unknown'
           }
         } else {
+          // eslint-disable-next-line
           console.error(error)
           this.errorMsg = 'error.unknown'
         }
