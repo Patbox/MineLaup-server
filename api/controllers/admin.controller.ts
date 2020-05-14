@@ -88,6 +88,31 @@ async function users(req: Request, res: Response) {
   }
 }
 
+async function fetchUser(req: Request, res: Response) {
+  if (req.query.id) {
+    const user = await Users.findOne({
+      attributes: [
+        'id',
+        'username',
+        'email',
+        'role',
+        'language',
+        'createdAt',
+        'colorMode',
+      ],
+      where: { id: req.query.id },
+    })
+
+    return res.status(200).send({
+      user,
+    })
+  } else {
+    return res.status(400).send({
+      message: 'User ID not provided',
+    })
+  }
+}
+
 async function createUser(req: Request, res: Response) {
   const schema = Joi.object({
     username: Joi.string(),
@@ -169,8 +194,60 @@ async function deleteUser(req: Request, res: Response) {
   }
 }
 
+async function updateUser(req: Request, res: Response) {
+  const schema = Joi.object({
+    username: Joi.string(),
+    email: Joi.string().email().allow(''),
+    role: Joi.string().valid('admin', 'moderator', 'user'),
+    colorMode: Joi.string().valid('DARK', 'LIGHT'),
+  })
+
+  const { error }: ValidationResult = schema.validate(req.body, {
+    abortEarly: false,
+  })
+
+  if (error) {
+    const formatedErrors: any = {}
+
+    for (const e of error.details) {
+      formatedErrors[e.path[0]] = {
+        message: e.message,
+        errorKey: `error.validation.${e.type.replace(/\./g, '_')}`,
+      }
+    }
+
+    return res.status(400).send({
+      errors: formatedErrors,
+    })
+  }
+
+  try {
+    await Users.update(
+      {
+        username: req.body.username,
+        email: req.body.email.length > 0 ? req.body.email : null,
+        role: UserRole[req.body.role],
+        colorMode: req.body.colorMode,
+      },
+      {
+        where: {
+          id: req.query.id,
+        },
+      }
+    )
+
+    return res.status(200).send({
+      message: 'User update',
+    })
+  } catch (error) {
+    return res.status(500).send(error)
+  }
+}
+
 export default {
   users,
   createUser,
   deleteUser,
+  fetchUser,
+  updateUser,
 }
