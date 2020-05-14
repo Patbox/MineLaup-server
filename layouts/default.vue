@@ -15,7 +15,11 @@ import NavBar from '~/components/global/NavBar.vue'
 })
 export default class Default extends Vue {
   async mounted() {
-    await this.$auth.fetchUser()
+    try {
+      await this.$auth.fetchUser()
+    } catch (error) {
+      this.$auth.logout()
+    }
   }
 }
 </script>

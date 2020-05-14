@@ -42,9 +42,25 @@
           "email": "Adresse Email",
           "submit": "Créer",
           "role": "Rôle"
+        },
+        "update": {
+          "username": "Nom d'utilisateur",
+          "password": "Mot de passe",
+          "email": "Adresse Email",
+          "role": "Rôle",
+          "submit": "Modifier",
+          "color-mode": "Thème",
+          "color-dark": "Sombre",
+          "color-light": "Clair"
         }
       },
-      "administration": "Administration"
+      "administration": "Administration",
+      "user-edit": {
+        "title": "Éditer l'utilisateur"
+      },
+      "create": {
+        "title": "Créé un utilisateur"
+      }
     }
   },
   "auth": {

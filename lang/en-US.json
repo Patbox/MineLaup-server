@@ -43,9 +43,25 @@
           "submit": "Create",
           "role": "Role",
           "language": "Language"
+        },
+        "update": {
+          "username": "Username",
+          "password": "Password",
+          "email": "Email Address",
+          "role": "Role",
+          "submit": "Update",
+          "color-mode": "Theme",
+          "color-dark": "Dark",
+          "color-light": "Light"
         }
       },
-      "administration": "Administration"
+      "administration": "Administration",
+      "user-edit": {
+        "title": "Edit user"
+      },
+      "create": {
+        "title": "Create an user"
+      }
     }
   },
   "auth": {
