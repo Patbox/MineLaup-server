@@ -208,6 +208,8 @@ export default class UserList extends Vue {
     filter: '',
   }
 
+  errorMsg: string = ''
+
   async asyncData({ $axios, route }: Context) {
     const { total, current, users } = await $axios.$get('/api/admin/users', {
       params: {
