@@ -62,6 +62,16 @@
       "create": {
         "title": "Create an user"
       }
+    },
+    "settings": {
+      "user-information": "User information",
+      "username": "Username",
+      "email": "Email address",
+      "color-mode": "Theme",
+      "color-dark": "Dark",
+      "color-light": "Light",
+      "password": "Security password",
+      "submit": "Update"
     }
   },
   "auth": {
@@ -79,7 +89,9 @@
     "side-bar": {
       "launcher": "Launchers",
       "modpacks": "Modpacks",
-      "administration": "Administration"
+      "administration": "Administration",
+      "settings": "Settings",
+      "logout": "Logout"
     }
   }
 }

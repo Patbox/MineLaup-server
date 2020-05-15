@@ -163,6 +163,7 @@ module.exports = {
 
     redirect: {
       login: '/login',
+      logout: '/login',
     },
   },
 }

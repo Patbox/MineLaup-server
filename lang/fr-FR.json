@@ -61,6 +61,16 @@
       "create": {
         "title": "Créé un utilisateur"
       }
+    },
+    "settings": {
+      "user-information": "Informations utilisateur",
+      "username": "Nom d'utilisateur",
+      "email": "Adresse Email",
+      "color-mode": "Thème",
+      "color-dark": "Sombre",
+      "color-light": "Clair",
+      "password": "Mot de passe de sécurité",
+      "submit": "Modifier"
     }
   },
   "auth": {
@@ -78,7 +88,9 @@
     "side-bar": {
       "launcher": "Launchers",
       "modpacks": "Pack de mods",
-      "administration": "Administration"
+      "administration": "Administration",
+      "settings": "Paramètres",
+      "logout": "Déconnexion"
     }
   }
 }
