@@ -182,7 +182,6 @@ async function update(req: Request, res: Response) {
         if (req.body.email?.length > 0 && user.email !== req.body.email)
           values.email = req.body.email
 
-        console.log(req.body.colorMode)
         if (
           typeof req.body.colorMode === 'string' &&
           user.colorMode !== req.body.colorMode
@@ -205,8 +204,6 @@ async function update(req: Request, res: Response) {
           where: { id: result.id },
           raw: true,
         })
-
-        console.log(userNew, values)
 
         if (userNew) {
           const token = jwt.sign(
