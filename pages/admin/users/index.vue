@@ -20,14 +20,14 @@
         <div class="relative">
           <select
             v-model="search.items"
-            class="appearance-none w-full bg-gray-300 rounded-l-full py-2 px-5 placeholder-gray-700 focus:outline-none text-black"
+            class="appearance-none w-full bg-gray-300 dark:bg-gray-700 rounded-l-full py-2 px-5 placeholder-gray-700 focus:outline-none text-black dark:text-white"
           >
             <option value="5">5</option>
             <option value="10">10</option>
             <option value="20">20</option>
           </select>
           <div
-            class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700"
+            class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700 dark:text-white"
           >
             <i class="fas fa-caret-down"></i>
           </div>
@@ -35,7 +35,7 @@
         <div class="relative">
           <select
             v-model="search.type"
-            class="appearance-none w-full bg-gray-300 py-2 px-5 placeholder-gray-700 focus:outline-none text-black"
+            class="appearance-none w-full bg-gray-300 dark:bg-gray-700 py-2 px-5 focus:outline-none text-black dark:text-white"
           >
             <option value="-1">
               {{ $t('pages.admin.users.list.filter.all') }}
@@ -51,7 +51,7 @@
             </option>
           </select>
           <div
-            class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700"
+            class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700 dark:text-white"
           >
             <i class="fas fa-caret-down"></i>
           </div>
@@ -62,7 +62,7 @@
           </span>
           <input
             :placeholder="$t('pages.admin.users.list.filter.search')"
-            class="appearance-none w-full bg-gray-300 rounded-r-full pl-10 py-2 px-4 placeholder-gray-700 focus:outline-none text-black"
+            class="appearance-none w-full bg-gray-300 dark:bg-gray-700 rounded-r-full pl-10 py-2 px-4 placeholder-gray-700 dark-placeholder:text-white focus:outline-none text-black dark:text-white"
             @input="debounceSearch($event.target.value)"
           />
         </div>
@@ -75,39 +75,39 @@
           <thead>
             <tr>
               <th
-                class="px-5 py-3 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-600 uppercase tracking-wide"
+                class="px-5 py-3 border-b-2 border-gray-200 dark:border-gray-600 bg-gray-100 dark:bg-gray-800 text-left text-xs font-semibold text-gray-600 dark:text-gray-400 uppercase tracking-wide"
               >
                 {{ $t('pages.admin.users.list.table.username') }}
               </th>
               <th
-                class="px-5 py-3 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-600 uppercase tracking-wide"
+                class="px-5 py-3 border-b-2 border-gray-200 dark:border-gray-600 bg-gray-100 dark:bg-gray-800 text-left text-xs font-semibold text-gray-600 dark:text-gray-400 uppercase tracking-wide"
               >
                 {{ $t('pages.admin.users.list.table.email') }}
               </th>
               <th
-                class="px-5 py-3 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-600 uppercase tracking-wide"
+                class="px-5 py-3 border-b-2 border-gray-20 dark:border-gray-600 bg-gray-100 dark:bg-gray-800 text-left text-xs font-semibold text-gray-600 dark:text-gray-400 uppercase tracking-wide"
               >
                 {{ $t('pages.admin.users.list.table.role') }}
               </th>
               <th
-                class="px-5 py-3 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-600 uppercase tracking-wide"
+                class="px-5 py-3 border-b-2 border-gray-200 dark:border-gray-600 bg-gray-100 dark:bg-gray-800 text-left text-xs font-semibold text-gray-600 dark:text-gray-400 uppercase tracking-wide"
               >
                 {{ $t('pages.admin.users.list.table.createdAt') }}
               </th>
               <th
-                class="px-5 py-3 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-600 uppercase tracking-wide"
+                class="px-5 py-3 border-b-2 border-gray-200 dark:border-gray-600 bg-gray-100 dark:bg-gray-800 text-left text-xs font-semibold text-gray-600 dark:text-gray-400 uppercase tracking-wide"
               >
                 {{ $t('pages.admin.users.list.table.language') }}
               </th>
               <th
-                class="px-5 py-3 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-600 uppercase tracking-wide"
+                class="px-5 py-3 border-b-2 border-gray-200 dark:border-gray-600 bg-gray-100 dark:bg-gray-800 text-left text-xs font-semibold text-gray-600 dark:text-gray-400 uppercase tracking-wide"
               >
                 {{ $t('pages.admin.users.list.table.actions') }}
               </th>
             </tr>
           </thead>
-          <tbody>
-            <tr v-for="(user, index) in users" :key="index">
+          <tbody class="dark:bg-gray-700">
+            <tr v-for="(user, index) in users" :key="index" class="text-center">
               <td class="py-4">
                 {{ user.username }}
               </td>
@@ -162,6 +162,7 @@
       <div slot="actions" class="flex flex-col items-center">
         <t-button
           bg-hover-color="red-600"
+          dark-bg-hover-color="red-600"
           class="flex-1 mb-2 md:w-1/2"
           @click="deleteUser"
         >
@@ -170,6 +171,7 @@
         <t-button
           class="flex-1 md:w-1/2"
           bg-hover-color="gray-800"
+          dark-bg-hover-color="gray-800"
           @click="closeModal"
         >
           {{ $t('pages.admin.users.list.modal.cancel-btn') }}

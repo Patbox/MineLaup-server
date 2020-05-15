@@ -3,9 +3,7 @@
     <div class="m-2 text-md text-green-500 uppercase font-bold tracking-wide">
       {{ name }}
     </div>
-    <div class="divide-y divide-gray-400">
-      <slot></slot>
-    </div>
+    <slot></slot>
   </div>
 </template>
 

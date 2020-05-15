@@ -6,14 +6,7 @@
       'border-' + bgHoverColor,
       {
         'border-gray-600 text-gray-500 cursor-auto': disabled,
-        ['text-' +
-        color +
-        ' bg-' +
-        bgColor +
-        ' hover:bg-' +
-        bgHoverColor +
-        ' hover:text-' +
-        hoverColor]: !disabled,
+        [currentColor]: !disabled,
       },
     ]"
     :disabled="disabled"
@@ -43,14 +36,26 @@ export default class Button extends Vue {
   @Prop({ default: 'white' })
   hoverColor!: String
 
+  @Prop({ default: 'white' })
+  darkHoverColor!: String
+
   @Prop({ default: 'green-400' })
   bgHoverColor!: string
+
+  @Prop({ default: 'green-400' })
+  darkBgHoverColor!: string
 
   @Prop({ default: 'transparent' })
   bgColor!: string
 
+  @Prop({ default: 'transparent' })
+  darkBgColor!: string
+
   @Prop({ default: 'gray-900' })
   color!: string
+
+  @Prop({ default: 'white' })
+  darkColor!: string
 
   @Prop()
   disabled!: boolean
@@ -60,6 +65,10 @@ export default class Button extends Vue {
 
   @Prop()
   type!: string
+
+  get currentColor() {
+    return `text-${this.color} bg-${this.bgColor} hover:bg-${this.bgHoverColor} hover:text-${this.hoverColor} dark:text-${this.darkColor} dark:bg-${this.darkBgColor} dark-hover:bg-${this.darkBgHoverColor} dark-hover:text-${this.darkHoverColor}`
+  }
 }
 </script>
 

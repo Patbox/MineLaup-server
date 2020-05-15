@@ -32,6 +32,7 @@
     "@nuxt/typescript-runtime": "^0.4.6",
     "@nuxtjs/auth": "^4.9.1",
     "@nuxtjs/axios": "^5.10.3",
+    "@nuxtjs/color-mode": "^1.0.0",
     "@nuxtjs/dotenv": "^1.4.1",
     "@nuxtjs/pwa": "^3.0.0-beta.20",
     "bcrypt": "^4.0.1",
@@ -52,7 +53,8 @@
     "reflect-metadata": "^0.1.13",
     "sequelize": "^5.21.8",
     "sequelize-typescript": "^1.1.0",
-    "sqlite3": "^4.2.0"
+    "sqlite3": "^4.2.0",
+    "tailwindcss-dark-mode": "^1.1.4"
   },
   "devDependencies": {
     "@nuxt/types": "^0.7.5",

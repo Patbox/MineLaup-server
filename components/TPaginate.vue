@@ -1,10 +1,10 @@
 <template>
   <div class="flex flex-col items-center">
-    <div class="flex text-gray-700">
+    <div class="flex text-gray-700 dark:text-gray-300">
       <nuxt-link
         v-if="current > 1"
         :to="changePage(current - 1)"
-        class="h-10 w-10 mr-1 flex justify-center items-center rounded-full hover:bg-gray-200 cursor-pointer"
+        class="h-10 w-10 mr-1 flex justify-center items-center rounded-full hover:bg-gray-300 dark-hover:bg-gray-700 cursor-pointer"
       >
         <i class="text-xl fas fa-caret-left"></i>
       </nuxt-link>
@@ -16,7 +16,7 @@
         class="h-10 w-10 mr-1 flex justify-center items-center rounded-full cursor-pointer"
         :class="{
           'bg-green-400 text-white': current === index + 1,
-          'hover:bg-gray-200': current !== index + 1,
+          'hover:bg-gray-300 dark-hover:bg-gray-700': current !== index + 1,
         }"
       >
         {{ index + 1 }}
@@ -25,7 +25,7 @@
       <nuxt-link
         v-if="current < last"
         :to="changePage(current + 1)"
-        class="h-10 w-10 mr-1 flex justify-center items-center rounded-full hover:bg-gray-200 cursor-pointer"
+        class="h-10 w-10 mr-1 flex justify-center items-center rounded-full hover:bg-gray-300 dark-hover:bg-gray-700 cursor-pointer"
       >
         <i class="text-xl fas fa-caret-right"></i>
       </nuxt-link>

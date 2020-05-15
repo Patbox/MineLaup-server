@@ -12,7 +12,7 @@
         :id="id"
         :checked="value"
         type="checkbox"
-        class="inline-block w-6 h-6 mr-2 rounded-full bg-white border-2 appearance-none cursor-pointer outline-none text-green-400 transition duration-200 ease-in shadow"
+        class="inline-block w-6 h-6 mr-2 rounded-full border-2 appearance-none cursor-pointer outline-none text-green-400 transition duration-200 ease-in shadow"
         @input="$emit('input', $event.target.checked)"
       />
       <label :for="id" class="toggle-label inline rounded-full cursor-pointer">

@@ -1,11 +1,11 @@
 <template>
   <nuxt-link
     :to="to"
-    class="p-2 pl-4 cursor-pointer"
+    class="p-2 pl-4 cursor-pointer transition ease-out duration-100"
     tag="div"
     :class="{
       'bg-green-400 text-white': isCurrentRoute,
-      'hover:bg-gray-200': !isCurrentRoute,
+      'hover:bg-gray-200 dark-hover:bg-gray-800': !isCurrentRoute,
     }"
   >
     <slot></slot>

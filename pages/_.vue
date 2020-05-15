@@ -4,7 +4,7 @@
       <span class="text-6xl text-gray-500">
         <i class="fas fa-map-signs"></i>
       </span>
-      <h1 class="text-3xl font-bold text-gray-900">
+      <h1 class="text-3xl font-bold text-gray-900 dark:text-gray-400">
         {{ $t('pages.not_found') }}
       </h1>
     </div>

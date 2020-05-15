@@ -38,6 +38,7 @@ module.exports = {
     // Doc: https://github.com/nuxt-community/nuxt-tailwindcss
     '@nuxtjs/tailwindcss',
     'nuxt-i18n',
+    '@nuxtjs/color-mode',
   ],
   /*
    ** Nuxt.js modules
