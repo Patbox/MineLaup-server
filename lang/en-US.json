@@ -71,12 +71,17 @@
       "color-dark": "Dark",
       "color-light": "Light",
       "password": "Security password",
-      "submit": "Update"
+      "submit": "Update",
+      "password-update": "Change password",
+      "current_password": "Current password",
+      "new_password": "New password",
+      "confirm_password": "Password confirmation"
     }
   },
   "auth": {
     "login": {
-      "invalid": "Invalid username or password."
+      "invalid": "Invalid username or password.",
+      "bad_password": "Bad password"
     }
   },
   "error": {

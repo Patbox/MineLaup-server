@@ -1,74 +1,137 @@
 <template>
-  <div class="p-4">
-    <h1 class="font-bold text-3xl trext-gray-900 uppercase">
-      {{ $t('pages.settings.user-information') }}
-    </h1>
+  <div class="flex flex-row">
+    <div class="flex-1 p-4">
+      <h1 class="font-bold text-3xl trext-gray-900 uppercase">
+        {{ $t('pages.settings.user-information') }}
+      </h1>
 
-    <form class="p-10" @submit.prevent="updateInfos">
-      <div class="px-10 w-full md:1/3 mx-auto mb-6">
-        <div
-          v-if="errorMsg"
-          class="flex items-center bg-red-500 text-white text-sm font-bold px-4 py-3"
-          role="alert"
-        >
-          <i class="fas fa-exclamation-circle w-4 h-4 mr-2"></i>
-          <p>{{ $t(errorMsg) }}</p>
+      <form class="p-10 items-center" @submit.prevent="updateInfos">
+        <div class="px-10 w-2/3 mb-6">
+          <div
+            v-if="errorMsg"
+            class="flex items-center bg-red-500 text-white text-sm font-bold px-4 py-3"
+            role="alert"
+          >
+            <i class="fas fa-exclamation-circle w-4 h-4 mr-2"></i>
+            <p>{{ $t(errorMsg) }}</p>
+          </div>
         </div>
-      </div>
 
-      <t-input
-        id="username"
-        v-model="form.username"
-        :label="$t('pages.settings.username')"
-        icon="user"
-        class="w-1/3 mb-4"
-        autocomplete="off"
-        :error="errors.username ? $t(errors.username.errorKey) : ''"
-      />
+        <t-input
+          id="username"
+          v-model="form.username"
+          :label="$t('pages.settings.username')"
+          icon="user"
+          class="w-2/3 mb-4"
+          autocomplete="off"
+          :error="errors.username ? $t(errors.username.errorKey) : ''"
+        />
 
-      <t-input
-        id="email"
-        v-model="form.email"
-        :label="$t('pages.settings.email')"
-        icon="envelope"
-        class="w-1/3 mb-4"
-        autocomplete="off"
-        type="email"
-        :error="errors.email ? $t(errors.email.errorKey) : ''"
-      />
+        <t-input
+          id="email"
+          v-model="form.email"
+          :label="$t('pages.settings.email')"
+          icon="envelope"
+          class="w-2/3 mb-4"
+          autocomplete="off"
+          type="email"
+          :error="errors.email ? $t(errors.email.errorKey) : ''"
+        />
 
-      <t-checkbox
-        id="color-mode"
-        v-model="form.colorMode"
-        class="w-1/3 mb-4"
-        :label="$t('pages.settings.color-mode')"
-        :on-text="$t('pages.settings.color-dark')"
-        :off-text="$t('pages.settings.color-light')"
-        :error="errors.colorMode ? $t(errors.colorMode.errorKey) : ''"
-      ></t-checkbox>
+        <t-checkbox
+          id="color-mode"
+          v-model="form.colorMode"
+          class="w-2/3 mb-4"
+          :label="$t('pages.settings.color-mode')"
+          :on-text="$t('pages.settings.color-dark')"
+          :off-text="$t('pages.settings.color-light')"
+          :error="errors.colorMode ? $t(errors.colorMode.errorKey) : ''"
+        ></t-checkbox>
 
-      <t-input
-        id="password"
-        v-model="form.password"
-        :label="$t('pages.settings.password')"
-        icon="lock"
-        class="w-1/3 mb-4"
-        autocomplete="off"
-        type="password"
-        :error="errors.password ? $t(errors.password.errorKey) : ''"
-      />
+        <div class="divide-y"></div>
 
-      <div class="w-1/3 text-center">
-        <t-button
-          class="w-1/2"
-          icon="user-edit"
-          type="submit"
-          :disabled="!formValid"
-        >
-          {{ $t('pages.settings.submit') }}
-        </t-button>
-      </div>
-    </form>
+        <t-input
+          id="password"
+          v-model="form.password"
+          :label="$t('pages.settings.password')"
+          icon="lock"
+          class="w-2/3 mb-4"
+          autocomplete="off"
+          type="password"
+          :error="errors.password ? $t(errors.password.errorKey) : ''"
+        />
+
+        <div class="w-2/3 text-center">
+          <t-button
+            class="w-1/2"
+            icon="user-edit"
+            type="submit"
+            :disabled="!formValid"
+          >
+            {{ $t('pages.settings.submit') }}
+          </t-button>
+        </div>
+      </form>
+    </div>
+    <div class="flex-1 p-4">
+      <h1 class="font-bold text-3xl trext-gray-900 uppercase">
+        {{ $t('pages.settings.password-update') }}
+      </h1>
+
+      <form class="p-10 items-center" @submit.prevent="updatePassword">
+        <div class="px-10 w-2/3 mb-6">
+          <div
+            v-if="error2Msg"
+            class="flex items-center bg-red-500 text-white text-sm font-bold px-4 py-3"
+            role="alert"
+          >
+            <i class="fas fa-exclamation-circle w-4 h-4 mr-2"></i>
+            <p>{{ $t(error2Msg) }}</p>
+          </div>
+        </div>
+
+        <t-input
+          id="current-password"
+          v-model="formPass.current"
+          :label="$t('pages.settings.current_password')"
+          icon="lock"
+          class="w-2/3 mb-4"
+          type="password"
+          :error="errors.current ? $t(errors.current.errorKey) : ''"
+        />
+
+        <t-input
+          id="new_password"
+          v-model="formPass.new"
+          :label="$t('pages.settings.new_password')"
+          icon="lock"
+          class="w-2/3 mb-4"
+          type="password"
+          :error="errors.new ? $t(errors.new.errorKey) : ''"
+        />
+
+        <t-input
+          id="confirm_password"
+          v-model="formPass.confirm"
+          :label="$t('pages.settings.confirm_password')"
+          icon="lock"
+          class="w-2/3 mb-4"
+          type="password"
+          :error="errors.confirm ? $t(errors.confirm.errorKey) : ''"
+        />
+
+        <div class="w-2/3 text-center">
+          <t-button
+            class="w-1/2"
+            icon="user-edit"
+            type="submit"
+            :disabled="!formPassValid"
+          >
+            {{ $t('pages.settings.submit') }}
+          </t-button>
+        </div>
+      </form>
+    </div>
   </div>
 </template>
 
@@ -97,7 +160,14 @@ export default class Settings extends Vue {
     colorMode: false,
   }
 
+  formPass = {
+    current: '',
+    new: '',
+    confirm: '',
+  }
+
   errorMsg: string = ''
+  error2Msg: string = ''
   errors = {}
 
   layout() {
@@ -137,6 +207,39 @@ export default class Settings extends Vue {
             case 400:
               this.errors = Object.assign({}, error.response.data.errors)
               break
+            case 403:
+              this.errorMsg = error.response.data.errorKey
+              break
+            case 500:
+              this.errorMsg = error.response.data.errors[0].message
+              break
+            default:
+              this.errorMsg = 'error.unknown'
+          }
+        } else {
+          // eslint-disable-next-line
+          console.error(error)
+          this.errorMsg = 'error.unknown'
+        }
+      })
+  }
+
+  async updatePassword() {
+    await this.$axios
+      .post('/api/auth/change-password', this.formPass)
+      .then(async (response) => {
+        await this.$auth.setUser(response.data.user)
+        await this.$auth.setUserToken(response.data.token)
+      })
+      .catch((error) => {
+        if (error.response?.status) {
+          switch (error.response.status) {
+            case 400:
+              this.errors = Object.assign({}, error.response.data.errors)
+              break
+            case 403:
+              this.errorMsg = error.response.data.errorKey
+              break
             case 500:
               this.errorMsg = error.response.data.errors[0].message
               break
@@ -153,6 +256,14 @@ export default class Settings extends Vue {
 
   get formValid() {
     return this.form.username.length > 0 && this.form.password.length > 0
+  }
+
+  get formPassValid() {
+    return (
+      this.formPass.current.length > 0 &&
+      this.formPass.new.length > 0 &&
+      this.formPass.new === this.formPass.confirm
+    )
   }
 }
 </script>

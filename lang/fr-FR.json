@@ -70,12 +70,17 @@
       "color-dark": "Sombre",
       "color-light": "Clair",
       "password": "Mot de passe de sécurité",
-      "submit": "Modifier"
+      "submit": "Modifier",
+      "password-update": "Changer le mot de passe",
+      "current_password": "Mot de passe actuelle",
+      "new_password": "Nouveau mot de passe",
+      "confirm_password": "Confirmation du mot de passe"
     }
   },
   "auth": {
     "login": {
-      "invalid": "Nom d'utilisateur ou mot de passe invalide."
+      "invalid": "Nom d'utilisateur ou mot de passe invalide.",
+      "bad_password": "Mauvais mot de passe"
     }
   },
   "error": {
