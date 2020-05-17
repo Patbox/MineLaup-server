@@ -16,7 +16,7 @@
       <div class="w-12 text-right">
         <div ref="languageList">
           <a
-            class="border-b-2 border-transparent hover:border-white w-10 cursor-pointer py-1 select-none select-input"
+            class="border-b-2 border-transparent hover:border-white w-10 cursor-pointer py-1 select-none select-input transition ease-out duration-300"
             :class="{ 'border-white': showLanguageList }"
             @click="toggleList"
           >
@@ -28,13 +28,16 @@
 
           <ul
             v-if="showLanguageList"
-            class="text-left bg-white p-1 rounded-lg w-1/5 right-0 mr-2 mt-4 absolute shadow-lg overflow-x-auto"
+            class="z-10 text-left bg-white dark:bg-gray-700 p-1 rounded-lg w-1/5 right-0 mr-2 mt-4 absolute shadow-lg overflow-x-auto"
           >
             <li
               v-for="locale in locales"
               :key="locale.iso"
-              class="text-black border-b last:border-transparent border-grey-600 px-4 py-2 hover:bg-gray-200 cursor-pointer"
-              :class="{ 'text-green-600': locale.code == $i18n.locale }"
+              class="text-black dark:text-white border-b last:border-transparent border-gray-400 px-4 py-2 hover:bg-gray-200 dark-hover:bg-gray-600 cursor-pointer"
+              :class="{
+                'text-green-600 dark:text-green-600':
+                  locale.code == $i18n.locale,
+              }"
               @click="changeLanguage(locale.code)"
             >
               {{ locale.name }}
@@ -75,7 +78,7 @@ export default class NavBar extends Vue {
   get locales() {
     // @ts-ignore
     const locales = this.$i18n.locales
-    return locales.sort((a: any, b: any) => {
+    return locales?.sort((a: any, b: any) => {
       if (a.code < b.code) return -1
       if (a.code > b.code) return 1
       return 0

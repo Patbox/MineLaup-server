@@ -1,8 +1,8 @@
-export type IUserRole = 'superadmin' | 'admin' | 'moderator' | 'user'
+export type IUserRole = 3 | 2 | 1 | 0
 
 export const UserRole: { [id: string]: IUserRole } = {
-  superadmin: 'superadmin',
-  admin: 'admin',
-  moderator: 'moderator',
-  user: 'user',
+  superadmin: 3,
+  admin: 2,
+  moderator: 1,
+  user: 0,
 }

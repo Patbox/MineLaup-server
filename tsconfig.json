@@ -24,8 +24,15 @@
         "./*"
       ]
     },
+    "types": [
+      "@nuxt/types",
+      "@nuxtjs/auth",
+      "nuxt-i18n",
+      "@nuxtjs/axios"
+    ],
     "typeRoots": [
-      "node_modules/@types"
+      "node_modules/@types",
+      "./types"
     ]
   },
   "exclude": [

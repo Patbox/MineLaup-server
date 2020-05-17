@@ -19,7 +19,7 @@ module.exports = {
   /*
    ** Customize the progress-bar color
    */
-  loading: { color: '#fff' },
+  loading: { color: '#68d391', height: '3px' },
   /*
    ** Global CSS
    */
@@ -38,6 +38,7 @@ module.exports = {
     // Doc: https://github.com/nuxt-community/nuxt-tailwindcss
     '@nuxtjs/tailwindcss',
     'nuxt-i18n',
+    '@nuxtjs/color-mode',
   ],
   /*
    ** Nuxt.js modules
@@ -152,7 +153,7 @@ module.exports = {
             propertyName: 'token',
           },
           logout: false,
-          user: false, // { url: '/api/auth/user', method: 'get', propertyName: 'user' },
+          user: { url: '/api/auth/user', method: 'get', propertyName: 'user' },
         },
         tokenRequired: true,
         tokenType: '',
@@ -162,6 +163,7 @@ module.exports = {
 
     redirect: {
       login: '/login',
+      logout: '/login',
     },
   },
 }

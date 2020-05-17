@@ -9,5 +9,11 @@ module.exports = {
   plugins: ['stylelint-prettier'],
   rules: {
     'prettier/prettier': true,
+    'at-rule-no-unknown': [
+      true,
+      {
+        ignoreAtRules: ['extend'],
+      },
+    ],
   },
 }

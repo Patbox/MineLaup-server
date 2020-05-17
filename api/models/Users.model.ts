@@ -41,7 +41,7 @@ export default class Users extends Model<Users> {
   email!: string
 
   @Default(UserRole.user)
-  @Column(DataType.ENUM(...Object.values(UserRole)))
+  @Column(DataType.TINYINT)
   role!: IUserRole
 
   @Default('en')

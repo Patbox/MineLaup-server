@@ -6,11 +6,82 @@
       "username": "Username",
       "password": "Password",
       "btn": "Login"
+    },
+    "not_found": "Route not found",
+    "admin": {
+      "users": {
+        "title": "Users",
+        "list": {
+          "title": "Users list",
+          "filter": {
+            "all": "All",
+            "admin": "Administrators",
+            "moderator": "Moderators",
+            "user": "Users",
+            "search": "Search"
+          },
+          "table": {
+            "username": "Username",
+            "role": "Role",
+            "email": "Email address",
+            "createdAt": "Created at",
+            "language": "Language",
+            "actions": "Actions"
+          },
+          "modal": {
+            "title": "Delete the account ?",
+            "description": "Wait ! You are going to delete the account of one of your user ! Are you really sure of what you're doing ?",
+            "delete-btn": "It's okay ! Delete it",
+            "cancel-btn": "Forget it"
+          }
+        },
+        "create": {
+          "title": "Create user",
+          "username": "Username",
+          "password": "Password",
+          "email": "Email address",
+          "submit": "Create",
+          "role": "Role",
+          "language": "Language"
+        },
+        "update": {
+          "username": "Username",
+          "password": "Password",
+          "email": "Email Address",
+          "role": "Role",
+          "submit": "Update",
+          "color-mode": "Theme",
+          "color-dark": "Dark",
+          "color-light": "Light"
+        }
+      },
+      "administration": "Administration",
+      "user-edit": {
+        "title": "Edit user"
+      },
+      "create": {
+        "title": "Create an user"
+      }
+    },
+    "settings": {
+      "user-information": "User information",
+      "username": "Username",
+      "email": "Email address",
+      "color-mode": "Theme",
+      "color-dark": "Dark",
+      "color-light": "Light",
+      "password": "Security password",
+      "submit": "Update",
+      "password-update": "Change password",
+      "current_password": "Current password",
+      "new_password": "New password",
+      "confirm_password": "Password confirmation"
     }
   },
   "auth": {
     "login": {
-      "invalid": "Invalid username or password."
+      "invalid": "Invalid username or password.",
+      "bad_password": "Bad password"
     }
   },
   "error": {
@@ -18,5 +89,14 @@
       "string_empty": "This field is required."
     },
     "unknown": "An unknown error happened. Please retry later."
+  },
+  "layout": {
+    "side-bar": {
+      "launcher": "Launchers",
+      "modpacks": "Modpacks",
+      "administration": "Administration",
+      "settings": "Settings",
+      "logout": "Logout"
+    }
   }
 }

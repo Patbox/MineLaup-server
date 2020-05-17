@@ -1,11 +1,12 @@
 <template>
   <button
-    class="px-4 py-2 border border-white rounded-full focus:outline-none"
+    class="px-4 py-2 border rounded-full focus:outline-none transition ease-out duration-300"
     :class="[
       !disabled ? 'hover:text-' + hoverColor : '',
+      'border-' + bgHoverColor,
       {
         'border-gray-600 text-gray-500 cursor-auto': disabled,
-        'hover:bg-white hover:text-transparent': !disabled,
+        [currentColor]: !disabled,
       },
     ]"
     :disabled="disabled"
@@ -20,7 +21,7 @@
         'fa-' + icon,
         {
           'border-gray-600 text-gray-500 cursor-auto': disabled,
-          'hover:bg-white hover:text-transparent': !disabled,
+          [' hover:text-' + hoverColor]: !disabled,
         },
       ]"
     ></i>
@@ -32,8 +33,29 @@
 import { Vue, Component, Prop } from 'nuxt-property-decorator'
 @Component
 export default class Button extends Vue {
-  @Prop({ default: 'gray-800' })
+  @Prop({ default: 'white' })
   hoverColor!: String
+
+  @Prop({ default: 'white' })
+  darkHoverColor!: String
+
+  @Prop({ default: 'green-400' })
+  bgHoverColor!: string
+
+  @Prop({ default: 'green-400' })
+  darkBgHoverColor!: string
+
+  @Prop({ default: 'transparent' })
+  bgColor!: string
+
+  @Prop({ default: 'transparent' })
+  darkBgColor!: string
+
+  @Prop({ default: 'gray-900' })
+  color!: string
+
+  @Prop({ default: 'white' })
+  darkColor!: string
 
   @Prop()
   disabled!: boolean
@@ -43,6 +65,10 @@ export default class Button extends Vue {
 
   @Prop()
   type!: string
+
+  get currentColor() {
+    return `text-${this.color} bg-${this.bgColor} hover:bg-${this.bgHoverColor} hover:text-${this.hoverColor} dark:text-${this.darkColor} dark:bg-${this.darkBgColor} dark-hover:bg-${this.darkBgHoverColor} dark-hover:text-${this.darkHoverColor}`
+  }
 }
 </script>
 
