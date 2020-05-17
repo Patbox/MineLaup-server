@@ -241,6 +241,7 @@ async function update(req: Request, res: Response) {
         errorKey: 'auth.login.bad_password',
       })
     } catch (error) {
+      // eslint-disable-next-line no-console
       console.error(error)
       return res.status(500).send(error)
     }
@@ -349,6 +350,7 @@ async function updatePassword(req: Request, res: Response) {
         errorKey: 'auth.login.invalid_token',
       })
     } catch (error) {
+      // eslint-disable-next-line no-console
       console.error(error)
       return res.status(500).send(error)
     }
