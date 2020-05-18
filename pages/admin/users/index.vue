@@ -1,6 +1,6 @@
 <template>
   <div>
-    <h1 class="font-bold text-3xl text-gray-900 uppercase">
+    <h1 class="font-bold text-3xl text-gray-900 dark:text-white uppercase">
       {{ $t('pages.admin.users.title') }}
     </h1>
 
