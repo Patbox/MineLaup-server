@@ -71,64 +71,27 @@ async function login(req: Request, res: Response) {
   }
 }
 
-async function user(req: Request, res: Response) {
-  const token = req.headers.authorization
-
-  if (!token) {
-    return res.status(400).send({
-      message: 'Authorization header not found.',
-      errorKey: 'auth.login.token_not_found',
+function user(req: Request, res: Response) {
+  if (req.body.user) {
+    return res.status(200).json({
+      message: 'Provided token is valid.',
+      user: req.body.user,
     })
   }
 
-  await jwt.verify(token, config.get().jwt_token, async function (
-    error:
-      | jwt.JsonWebTokenError
-      | jwt.NotBeforeError
-      | jwt.TokenExpiredError
-      | null,
-    result: object | undefined
-  ) {
-    if (error) {
-      return res.status(403).json({
-        message: 'Provided token is invalid.',
-        errorKey: 'auth.login.invalid_token',
-        error,
-      })
-    }
-
-    // @ts-ignore
-    const user = await Users.findOne({ where: { id: result.id } })
-
-    if (user) {
-      return res.status(200).json({
-        message: 'Provided token is valid.',
-        user,
-      })
-    }
-
-    return res.status(403).json({
-      message: 'Provided token is invalid.',
-      errorKey: 'auth.login.invalid_token',
-    })
+  return res.status(403).json({
+    message: 'Provided token is invalid.',
+    errorKey: 'auth.login.invalid_token',
   })
 }
 
 async function update(req: Request, res: Response) {
-  const token = req.headers.authorization
-
-  if (!token) {
-    return res.status(400).send({
-      message: 'Authorization header not found.',
-      errorKey: 'auth.login.token_not_found',
-    })
-  }
-
   const schema = Joi.object({
     username: Joi.string().allow('').optional(),
     password: Joi.string().required(),
     email: Joi.string().email().allow('').optional(),
     colorMode: Joi.string().valid('DARK', 'LIGHT').optional(),
+    user: Joi.any(),
   })
 
   const { error }: ValidationResult = schema.validate(req.body, {
@@ -150,101 +113,74 @@ async function update(req: Request, res: Response) {
     })
   }
 
-  await jwt.verify(token, config.get().jwt_token, async function (
-    error:
-      | jwt.JsonWebTokenError
-      | jwt.NotBeforeError
-      | jwt.TokenExpiredError
-      | null,
-    result: object | undefined
-  ) {
-    if (error) {
-      return res.status(403).json({
-        message: 'Provided token is invalid.',
-        errorKey: 'auth.login.invalid_token',
-        error,
-      })
-    }
+  const user = req.body.user
 
-    try {
-      // @ts-ignore
-      const user = await Users.findOne({ where: { id: result.id } })
+  if (user && (await user.validPassword(req.body.password))) {
+    const values: Partial<any> = {}
 
-      if (user && (await user.validPassword(req.body.password))) {
-        const values: Partial<any> = {}
+    if (req.body.username?.length > 0 && user.username !== req.body.username)
+      values.usename = req.body.username
 
-        if (
-          req.body.username?.length > 0 &&
-          user.username !== req.body.username
-        )
-          values.usename = req.body.username
+    if (req.body.email?.length > 0 && user.email !== req.body.email)
+      values.email = req.body.email
 
-        if (req.body.email?.length > 0 && user.email !== req.body.email)
-          values.email = req.body.email
+    if (
+      typeof req.body.colorMode === 'string' &&
+      user.colorMode !== req.body.colorMode
+    )
+      values.colorMode =
+        req.body.colorMode === 'DARK' ? ColorMode.DARK : ColorMode.LIGHT
 
-        if (
-          typeof req.body.colorMode === 'string' &&
-          user.colorMode !== req.body.colorMode
-        )
-          values.colorMode =
-            req.body.colorMode === 'DARK' ? ColorMode.DARK : ColorMode.LIGHT
-
-        await Users.update(
-          { ...values },
-          {
-            where: {
-              // @ts-ignore
-              id: result.id,
-            },
-          }
-        )
-
-        const userNew = await Users.findOne({
+    await Users.update(
+      { ...values },
+      {
+        where: {
           // @ts-ignore
-          where: { id: result.id },
-          raw: true,
-        })
-
-        if (userNew) {
-          const token = jwt.sign(
-            {
-              id: userNew.id,
-              username: userNew.username,
-              email: userNew.email,
-              role: userNew.role,
-              language: userNew.language,
-              colorMode: userNew.colorMode,
-            },
-            config.get().jwt_token,
-            {
-              expiresIn: '1d',
-            }
-          )
-
-          return res.status(200).json({
-            message: 'User updated.',
-            user: {
-              id: userNew.id,
-              username: userNew.username,
-              email: userNew.email,
-              role: userNew.role,
-              language: userNew.language,
-              colorMode: userNew.colorMode,
-            },
-            token,
-          })
-        }
+          id: user.id,
+        },
       }
+    )
 
-      return res.status(403).json({
-        message: 'Bad password.',
-        errorKey: 'auth.login.bad_password',
+    const userNew = await Users.findOne({
+      // @ts-ignore
+      where: { id: user.id },
+      raw: true,
+    })
+
+    if (userNew) {
+      const token = jwt.sign(
+        {
+          id: userNew.id,
+          username: userNew.username,
+          email: userNew.email,
+          role: userNew.role,
+          language: userNew.language,
+          colorMode: userNew.colorMode,
+        },
+        config.get().jwt_token,
+        {
+          expiresIn: '1d',
+        }
+      )
+
+      return res.status(200).json({
+        message: 'User updated.',
+        user: {
+          id: userNew.id,
+          username: userNew.username,
+          email: userNew.email,
+          role: userNew.role,
+          language: userNew.language,
+          colorMode: userNew.colorMode,
+        },
+        token,
       })
-    } catch (error) {
-      // eslint-disable-next-line no-console
-      console.error(error)
-      return res.status(500).send(error)
     }
+  }
+
+  return res.status(403).json({
+    message: 'Bad password.',
+    errorKey: 'auth.login.bad_password',
   })
 }
 

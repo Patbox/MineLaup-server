@@ -32,4 +32,8 @@ export default class Modpack extends Model<Modpack> {
   @ForeignKey(() => Users)
   @Column
   ownerId!: string
+
+  @Default(false)
+  @Column
+  hasPicture!: boolean
 }

@@ -1,6 +1,6 @@
 <template>
   <div>
-    <h1 class="font-bold text-3xl trext-gray-900 uppercase">
+    <h1 class="font-bold text-3xl text-gray-900 dark:text-white uppercase">
       {{ $t('pages.admin.create.title') }}
     </h1>
     <form class="p-10" @submit.prevent="createUser">

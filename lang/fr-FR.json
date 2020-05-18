@@ -75,6 +75,15 @@
       "current_password": "Mot de passe actuelle",
       "new_password": "Nouveau mot de passe",
       "confirm_password": "Confirmation du mot de passe"
+    },
+    "modpack": {
+      "create": {
+        "title": "Créer un nouveau pack de mods",
+        "name": "Nom",
+        "description": "Description",
+        "submit": "Créer"
+      },
+      "your-modpacks": "Vos packs de mods"
     }
   },
   "auth": {

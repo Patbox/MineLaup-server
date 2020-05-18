@@ -3,6 +3,9 @@ module.exports = {
   theme: {
     darkSelector: '.dark-mode',
     extend: {},
+    minHeight: {
+      '1': '4em',
+    },
   },
   variants: {
     borderColor: ['dark', 'dark-focus', 'dark-focus-within', 'hover', 'last'],
