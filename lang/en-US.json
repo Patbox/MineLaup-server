@@ -76,6 +76,15 @@
       "current_password": "Current password",
       "new_password": "New password",
       "confirm_password": "Password confirmation"
+    },
+    "modpack": {
+      "create": {
+        "title": "Create a new modpack",
+        "name": "Name",
+        "description": "Description",
+        "submit": "Create"
+      },
+      "your-modpacks": "Your modpacks"
     }
   },
   "auth": {
