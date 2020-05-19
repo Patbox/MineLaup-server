@@ -8,7 +8,7 @@
       tag="span"
       class="text-white w-12 h-10 flex hover:text-green-400 cursor-pointer border-l-2 border-transparent"
       :to="to"
-      :class="{ 'border-green-400 text-green-400': isCurrentRoute }"
+      active-class="border-green-400 text-green-400"
     >
       <span class="m-auto text-xl">
         <i class="fas" :class="'fa-' + icon"></i>
@@ -41,12 +41,5 @@ export default class TSideBarButton extends Vue {
   exact!: boolean
 
   showTitle: boolean = false
-
-  get isCurrentRoute() {
-    if (this.exact) {
-      return this.$route.path === this.to
-    }
-    return this.$route.path.startsWith(this.to)
-  }
 }
 </script>

@@ -10,7 +10,7 @@
         </t-side-bar-item>
       </t-side-bar-group>
     </t-side-bar-menu>
-    <div class="flex-1 p-4">
+    <div class="flex-1 p-4 overflow-x-auto">
       <nuxt-child />
     </div>
   </div>

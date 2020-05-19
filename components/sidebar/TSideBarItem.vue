@@ -1,12 +1,18 @@
 <template>
   <nuxt-link
     :to="to"
-    class="p-2 pl-4 cursor-pointer transition ease-out duration-100"
+    class="p-2 pl-4 cursor-pointer transition ease-out duration-100 hover:bg-gray-200 dark-hover:bg-gray-800"
     tag="div"
-    :class="{
-      'bg-green-400 text-white': isCurrentRoute,
-      'hover:bg-gray-200 dark-hover:bg-gray-800': !isCurrentRoute,
-    }"
+    :active-class="
+      exact
+        ? ''
+        : 'bg-green-400 text-white hover:bg-green-400 dark-hover:bg-green-400'
+    "
+    :exact-active-class="
+      exact
+        ? 'bg-green-400 text-white hover:bg-green-400 dark-hover:bg-green-400'
+        : ''
+    "
   >
     <slot></slot>
   </nuxt-link>
@@ -22,13 +28,5 @@ export default class TSideBarItem extends Vue {
 
   @Prop({ default: false, type: Boolean })
   exact!: boolean
-
-  get isCurrentRoute() {
-    if (this.exact) {
-      return this.$route.path === this.to
-    } else {
-      return this.$route.path.startsWith(this.to)
-    }
-  }
 }
 </script>

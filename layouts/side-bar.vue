@@ -1,6 +1,6 @@
 <template>
   <ColorScheme>
-    <div class="h-screen flex flex-col">
+    <div class="h-screen max-h-screen flex flex-col">
       <nav-bar></nav-bar>
 
       <div class="flex flex-1 flex-row dark:bg-gray-900 dark:text-white">
@@ -39,7 +39,7 @@
           </ul>
         </div>
 
-        <nuxt class="flex-1" />
+        <nuxt class="flex-1 max-height-with-nav" />
       </div>
     </div>
   </ColorScheme>
@@ -73,3 +73,9 @@ export default class SideBar extends Vue {
   }
 }
 </script>
+
+<style lang="scss" scoped>
+.max-height-with-nav {
+  max-height: calc(100vh - 5rem);
+}
+</style>
