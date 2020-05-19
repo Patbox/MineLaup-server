@@ -15,6 +15,9 @@ export default class ModpackVersion extends Model<ModpackVersion> {
   @Column
   id!: number
 
+  @Column
+  name!: string
+
   @ForeignKey(() => Modpack)
   @Column
   modpackId!: string
