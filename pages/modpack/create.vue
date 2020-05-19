@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="p-4">
     <h1 class="font-bold text-3xl text-gray-900 dark:text-white uppercase">
       {{ $t('pages.modpack.create.title') }}
     </h1>
@@ -48,6 +48,7 @@ import { Vue, Component } from 'nuxt-property-decorator'
 import TInput from '~/components/form/TInput.vue'
 import TTextarea from '~/components/form/TTextarea.vue'
 import TButton from '~/components/form/TButton.vue'
+import eventHub from '~/plugins/event-hub'
 
 @Component({
   components: {
@@ -73,6 +74,7 @@ export default class ModpackCreate extends Vue {
     this.$axios
       .post('/api/modpack/create', this.form)
       .then(() => {
+        eventHub.$emit('update-list')
         this.$router.push('/modpack')
       })
       .catch((error) => {

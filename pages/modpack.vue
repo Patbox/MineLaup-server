@@ -1,13 +1,13 @@
 <template>
   <div class="flex flex-row">
-    <t-side-bar-menu>
+    <t-side-bar-menu class="overflow-x-hidden">
       <t-side-bar-item to="/modpack/create" class="flex items-center">
         <span
           class="mr-4 bg-gray-300 text-gray-700 w-10 h-10 flex items-center justify-center rounded"
         >
           <i class="fas fa-plus"></i>
         </span>
-        <span class="flex-1">
+        <span class="flex-1 leading-none">
           {{ $t('pages.modpack.create.title') }}
         </span>
       </t-side-bar-item>
@@ -27,13 +27,13 @@
               <i class="fas fa-slash fa-stack-1x"></i>
             </span>
           </span>
-          <span class="flex-1">
+          <span class="flex-1 leading-none">
             {{ modpack.name }}
           </span>
         </t-side-bar-item>
       </t-side-bar-group>
     </t-side-bar-menu>
-    <div class="flex-1">
+    <div class="flex-1 overflow-x-auto">
       <nuxt-child />
     </div>
   </div>
@@ -41,10 +41,10 @@
 
 <script lang="ts">
 import { Vue, Component } from 'nuxt-property-decorator'
-import { Context } from '@nuxt/types'
 import TSideBarMenu from '~/components/sidebar/TSideBarMenu.vue'
 import TSideBarItem from '~/components/sidebar/TSideBarItem.vue'
 import TSideBarGroup from '~/components/sidebar/TSideBarGroup.vue'
+import eventHub from '~/plugins/event-hub'
 
 @Component({
   components: {
@@ -60,12 +60,16 @@ export default class Modpack extends Vue {
     return 'side-bar'
   }
 
-  async asyncData({ $axios }: Context) {
-    const { modpacks } = await $axios.$get('/api/modpack/list')
+  async fetch() {
+    const { modpacks } = await this.$axios.$get('/api/modpack/list')
 
-    return {
-      modpacks,
-    }
+    this.modpacks = modpacks
+  }
+
+  mounted() {
+    eventHub.$on('update-list', () => {
+      this.$fetch()
+    })
   }
 }
 </script>
