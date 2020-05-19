@@ -3,7 +3,7 @@
     <t-side-bar-menu class="overflow-x-hidden">
       <t-side-bar-item to="/modpack/create" class="flex items-center">
         <span
-          class="mr-4 bg-gray-300 text-gray-700 w-10 h-10 flex items-center justify-center rounded"
+          class="mr-4 bg-gray-300 dark:bg-gray-700 text-gray-700 dark:text-gray-300 w-10 h-10 flex items-center justify-center rounded"
         >
           <i class="fas fa-plus"></i>
         </span>
@@ -20,7 +20,7 @@
           class="flex items-center"
         >
           <span
-            class="mr-4 bg-gray-300 text-gray-700 w-10 h-10 flex items-center justify-center rounded"
+            class="mr-4 bg-gray-300 dark:bg-gray-700 text-gray-700 dark:text-gray-300 w-10 h-10 flex items-center justify-center rounded"
           >
             <span class="fa-stack fa-1x">
               <i class="fas fa-image fa-stack-1x"></i>
