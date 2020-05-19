@@ -6,5 +6,6 @@ const router = Router()
 
 router.post('/create', isLoggedMiddleware, ModpackController.create)
 router.get('/list', isLoggedMiddleware, ModpackController.list)
+router.get('/', isLoggedMiddleware, ModpackController.get)
 
 export default router
