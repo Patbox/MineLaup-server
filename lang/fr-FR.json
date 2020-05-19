@@ -86,7 +86,26 @@
         "description": "Description",
         "submit": "Créer"
       },
-      "your-modpacks": "Vos packs de mods"
+      "your-modpacks": "Vos packs de mods",
+      "view": {
+        "version": {
+          "title": "Vous n'avez actuellement créé aucun pack de mods.",
+          "new": "Créer une nouvelle version"
+        },
+        "nav": {
+          "version": "Versions",
+          "minecraft": "Minecraft",
+          "mods": "Mods",
+          "configuration": "Configuration",
+          "settings": "Réglages"
+        }
+      },
+      "version": {
+        "new": {
+          "name": "Nom de la version",
+          "create": "Créer"
+        }
+      }
     }
   },
   "auth": {
