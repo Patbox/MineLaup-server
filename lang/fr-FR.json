@@ -90,7 +90,13 @@
       "view": {
         "version": {
           "title": "Vous n'avez actuellement créé aucun pack de mods.",
-          "new": "Créer une nouvelle version"
+          "new": "Créer une nouvelle version",
+          "modal": {
+            "description": "Doucement ! Tu es sur le point de supprimer la version \"{v}\" de ce pack de mods ! Es-tu sûr de ce que tu fais ?",
+            "delete": "Supprimer la version ?",
+            "delete-btn": "Tout va bien ! Supprime-le",
+            "cancel-btn": "Laisse tomber"
+          }
         },
         "nav": {
           "version": "Versions",

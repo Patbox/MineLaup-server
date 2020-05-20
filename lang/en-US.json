@@ -91,7 +91,13 @@
       "view": {
         "version": {
           "title": "You currently have created no version for this modpack.",
-          "new": "Create a new version"
+          "new": "Create a new version",
+          "modal": {
+            "delete": "Delete the version ?",
+            "description": "Slow down ! Your are going to delete the version \"{v}\" of this modpack ! Are you really sure of what you're doing ?",
+            "delete-btn": "It's okay ! Delete it",
+            "cancel-btn": "Forget it"
+          }
         },
         "nav": {
           "version": "Versions",

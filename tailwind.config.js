@@ -9,6 +9,7 @@ module.exports = {
   },
   variants: {
     borderColor: ['dark', 'dark-focus', 'dark-focus-within', 'hover', 'last'],
+    borderWidth: ['first'],
     backgroundColor: [
       'dark',
       'dark-hover',

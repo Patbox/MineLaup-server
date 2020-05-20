@@ -27,6 +27,7 @@
           icon="code-branch"
           class="w-1/3 mb-4"
           :error="errors.version ? $t(errors.version.errorKey) : ''"
+          autocomplete="off"
           @keypress="isValidSemVer"
         />
 
