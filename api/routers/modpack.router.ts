@@ -9,5 +9,6 @@ router.get('/list', isLoggedMiddleware, ModpackController.list)
 router.get('/', isLoggedMiddleware, ModpackController.get)
 router.post('/versions/new', isLoggedMiddleware, ModpackController.newVersion)
 router.get('/versions', isLoggedMiddleware, ModpackController.versions)
+router.delete('/version', isLoggedMiddleware, ModpackController.deleteVersion)
 
 export default router
