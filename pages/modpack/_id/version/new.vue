@@ -20,6 +20,16 @@
           :error="errors.name ? $t(errors.name.errorKey) : ''"
         />
 
+        <t-input
+          id="name"
+          v-model="form.version"
+          :label="$t('pages.modpack.version.new.version')"
+          icon="code-branch"
+          class="w-1/3 mb-4"
+          :error="errors.version ? $t(errors.version.errorKey) : ''"
+          @keypress="isValidSemVer"
+        />
+
         <div class="w-1/3 text-center">
           <t-button class="w-1/2" icon="plus" type="submit">
             {{ $t('pages.modpack.version.new.create') }}
@@ -48,8 +58,48 @@ export default class ModpackNewVersion extends Vue {
 
   form = {
     name: '',
+    version: '',
+    modpackId: '',
   }
 
-  createVersion() {}
+  createVersion() {
+    this.errorMsg = ''
+    this.errors = {}
+
+    this.form.modpackId = this.$route.params.id
+
+    this.$axios
+      .post('/api/modpack/versions/new', this.form)
+      .then(() => {
+        this.$router.push('/modpack/' + this.$route.params.id)
+      })
+      .catch((error) => {
+        if (error.response?.status) {
+          switch (error.response.status) {
+            case 400:
+              this.errors = Object.assign({}, error.response.data.errors)
+              break
+            case 500:
+              this.errorMsg = error.response.data.errors[0].message
+              break
+            default:
+              this.errorMsg = 'error.unknown'
+          }
+        } else {
+          // eslint-disable-next-line
+          console.error(error)
+          this.errorMsg = 'error.unknown'
+        }
+      })
+  }
+
+  isValidSemVer(event: any) {
+    const charCode = event.which ? event.which : event.keyCore
+    if (charCode > 31 && (charCode < 48 || charCode > 57) && charCode !== 46) {
+      event.preventDefault()
+    } else {
+      return true
+    }
+  }
 }
 </script>

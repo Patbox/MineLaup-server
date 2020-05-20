@@ -103,7 +103,8 @@
       "version": {
         "new": {
           "name": "Nom de la version",
-          "create": "Créer"
+          "create": "Créer",
+          "version": "Version"
         }
       }
     }

@@ -26,6 +26,7 @@
         :value="value"
         :autocomplete="autocomplete"
         @input="$emit('input', $event.target.value)"
+        @keypress="$emit('keypress', $event)"
       />
       <span
         v-if="type === 'password'"
