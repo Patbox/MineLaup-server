@@ -1,0 +1,110 @@
+{
+  "app-name": "MineLaup",
+  "pages": {
+    "login": {
+      "title": "Logowanie",
+      "username": "Nazwa użytkownika",
+      "password": "Hasło",
+      "btn": "Zaloguj się"
+    },
+    "not_found": "Nie znaleziono podanej ścieżki",
+    "admin": {
+      "users": {
+        "title": "Użytkownicy",
+        "list": {
+          "title": "Lista użytkowników",
+          "filter": {
+            "all": "Wszyscy",
+            "admin": "Administratorzy",
+            "moderator": "Moderatorzy",
+            "user": "Użytkownicy",
+            "search": "Szukaj"
+          },
+          "table": {
+            "username": "Nazwa użytkownika",
+            "role": "Rola",
+            "email": "Adres Email",
+            "createdAt": "Utworzono",
+            "language": "Język",
+            "actions": "Akcje"
+          },
+          "modal": {
+            "title": "Usunąć to konto?",
+            "description": "Czekaj! Czy na pewno chcesz usunąć konto tego użytkownika?",
+            "delete-btn": "Tak",
+            "cancel-btn": "Nie"
+          }
+        },
+        "create": {
+          "title": "Stwórz użytkownika",
+          "username": "Nazwa użytkownika",
+          "password": "Hasło",
+          "email": "Adres Email",
+          "submit": "Utwórz",
+          "role": "Rola",
+          "language": "Język"
+        },
+        "update": {
+          "username": "Nazwa użytkownika",
+          "email": "Adres Email",
+          "role": "Rola",
+          "submit": "Zmień",
+          "color-mode": "Motyw",
+          "color-dark": "Ciemny",
+          "color-light": "Jasnu"
+        }
+      },
+      "administration": "Administracja",
+      "user-edit": {
+        "title": "Edytuj użytkownika"
+      },
+      "create": {
+        "title": "Stwórz użytkownika"
+      }
+    },
+    "settings": {
+      "user-information": "Informacje o użytkowniku",
+      "username": "Nazwa użytkownika",
+      "email": "Adres Email",
+      "color-mode": "Motyw",
+      "color-dark": "Ciemny",
+      "color-light": "Jasny",
+      "password": "Hasło",
+      "submit": "Zmień",
+      "password-update": "Zmień hasło",
+      "current_password": "Aktualne hasło",
+      "new_password": "Nowe hasło",
+      "confirm_password": "Potwierdź nowe hasło"
+    },
+    "modpack": {
+      "create": {
+        "title": "Stwórz paczkę modów",
+        "name": "Nazwa",
+        "description": "Opis",
+        "submit": "Utwórz"
+      },
+      "your-modpacks": "Twoje paczki modów"
+    }
+  },
+  "auth": {
+    "login": {
+      "invalid": "Niepoprawna nazwa użytkownika lub hasło",
+      "bad_password": "Złe hasło"
+    }
+  },
+  "error": {
+    "validation": {
+      "string_empty": "To pole jest wymagana."
+    },
+    "unknown": "Wystąpił nieznany błąd. Spróbuj zrobić to później."
+  },
+  "layout": {
+    "side-bar": {
+      "launcher": "Launchery",
+      "modpacks": "Paczki modyfikacji",
+      "administration": "Administracja",
+      "settings": "Ustawienia",
+      "logout": "Wyloguj"
+    }
+  }
+}
